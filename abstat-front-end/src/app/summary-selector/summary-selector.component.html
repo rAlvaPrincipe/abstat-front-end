@@ -1,0 +1,54 @@
+<div class="col-md-12">
+  <div class="box box-info">
+
+    <div class="box-header">
+      <h3 class="box-title">Stored summaries</h3>
+    </div>
+
+    <div class="box-body" style="overflow: auto;">
+      <table id="example2" class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>Select</th>
+            <th>Dataset</th>
+            <th>Ontology</th>
+            <th>Timestamp</th>
+            <th>Concept Min.</th>
+            <th>Inference</th>
+            <th>Cardinality</th>
+            <th>Property Min.</th>
+          </tr>
+        </thead>
+        <tbody >
+          <tr *ngFor="let summary of summaries">
+            <td class = "text-center">
+              <input type="radio" name="radiogroup" (click)="checked(summary)">
+            </td>
+            <td>{{summary.dsName}}</td>
+            <td>{{summary.listOntNames[0]}}</td>
+            <td>{{summary.timestamp}}</td>
+            <td>
+              <span *ngIf="summary.tipoMinimo" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
+              <span *ngIf="!summary.tipoMinimo" class="glyphicon glyphicon-remove text-danger" style="color:red"></span>
+            </td>
+            <td>
+              <span *ngIf="summary.inferences" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
+              <span *ngIf="!summary.inferences" class="glyphicon glyphicon-remove text-danger" style="color:red"></span>
+            </td>
+            <td>
+              <span *ngIf="summary.cardinalita" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
+              <span *ngIf="!summary.cardinalita" class="glyphicon glyphicon-remove text-danger" style="color:red"></span>
+            </td>
+            <td>
+              <span *ngIf="summary.propertyMinimaliz" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
+              <span *ngIf="!summary.propertyMinimaliz" class="glyphicon glyphicon-remove text-danger" style="color:red"></span>
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
