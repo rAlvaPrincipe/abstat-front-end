@@ -6,7 +6,6 @@ import {PrefixService} from '../prefix.service';
 @Component({
   selector: 'app-browse-autocomplete',
   templateUrl: './browse-autocomplete.component.html',
-  styleUrls: ['./browse-autocomplete.component.css'],
   providers:  [ PrefixService ]
 })
 export class BrowseAutocompleteComponent implements OnChanges  {
