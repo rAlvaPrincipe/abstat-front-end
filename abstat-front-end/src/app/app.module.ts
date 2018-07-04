@@ -12,11 +12,13 @@ import { BrowseComponent } from './browse/browse.component';
 import { BrowseAutocompleteComponent } from './browse-autocomplete/browse-autocomplete.component';
 import { HomeComponent } from './home/home.component';
 import { ConsolidateComponent } from './consolidate/consolidate.component';
+import { ApisComponent } from './apis/apis.component';
 
 const appRoutes: Routes = [
   { path: 'browse', component: BrowseComponent },
   { path: 'home', component: HomeComponent},
-  { path: 'consolidate', component: ConsolidateComponent}
+  { path: 'consolidate', component: ConsolidateComponent},
+  { path: 'apis', component: ApisComponent}
 ];
 
 
@@ -27,7 +29,8 @@ const appRoutes: Routes = [
     BrowseComponent,
     BrowseAutocompleteComponent,
     HomeComponent,
-    ConsolidateComponent
+    ConsolidateComponent,
+    ApisComponent
   ],
   imports: [
     BrowserModule,
