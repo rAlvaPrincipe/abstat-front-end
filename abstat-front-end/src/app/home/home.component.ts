@@ -12,12 +12,13 @@ export class HomeComponent implements OnInit {
   summaries: Summary[];
   datasets: Dataset[];
   ontologies: Ontology[];
-  constructor(private http: Http) { }
-
-  ngOnInit() {
+  constructor(private http: Http) {
     this.summaries = [];
     this.datasets = [];
     this.ontologies = [];
+  }
+
+  ngOnInit() {
     this.getSummaries();
     this.getDatasets();
     this.getOntologies();

@@ -11,10 +11,12 @@ import { SummarySelectorComponent } from './summary-selector/summary-selector.co
 import { BrowseComponent } from './browse/browse.component';
 import { BrowseAutocompleteComponent } from './browse-autocomplete/browse-autocomplete.component';
 import { HomeComponent } from './home/home.component';
+import { ConsolidateComponent } from './consolidate/consolidate.component';
 
 const appRoutes: Routes = [
   { path: 'browse', component: BrowseComponent },
-  { path: 'home', component: HomeComponent}
+  { path: 'home', component: HomeComponent},
+  { path: 'consolidate', component: ConsolidateComponent}
 ];
 
 
@@ -24,7 +26,8 @@ const appRoutes: Routes = [
     SummarySelectorComponent,
     BrowseComponent,
     BrowseAutocompleteComponent,
-    HomeComponent
+    HomeComponent,
+    ConsolidateComponent
   ],
   imports: [
     BrowserModule,
