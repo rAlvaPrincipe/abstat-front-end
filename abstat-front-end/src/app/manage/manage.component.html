@@ -1,0 +1,48 @@
+<div class="col-md-12">
+  <div class="box box-info">
+
+    <div class="box-header">
+      <h3 class="box-title">Management</h3>
+    </div>
+
+    <div class="box-body" style="overflow: auto;">
+        <div class="col-xs-3" style="margin-left: -6px;">
+          <label > On which data do you want to operate?  </label><br />
+          <select class="form-control"  [(ngModel)]="type" (change)="onTypeSelection()">
+            <option value="submitconfig" > Summaries </option>
+            <option value="dataset"> Datasets </option>
+            <option value="ontology"> Ontologies </option>
+          </select>
+        </div>
+    </div>
+
+    <div *ngIf="type === 'submitconfig'">
+      <app-summary-selector
+        [getEverySummary]="true"
+        [showStorageAttributes]="true"
+        [allowSelection]="true"
+        (onSummarySelected)="setId($event.id)">
+      </app-summary-selector>
+    </div>
+    <div *ngIf="type === 'ontology'">
+      <app-datasetontology-selector
+        [type]="'ontology'"
+        [allowSelection]="true"
+        (onItemSelected)="setId($event)">
+      </app-datasetontology-selector>
+    </div>
+    <div *ngIf="type === 'dataset'">
+      <app-datasetontology-selector
+        [type]="'dataset'"
+        [allowSelection]="true"
+        (onItemSelected)="setId($event)">
+      </app-datasetontology-selector>
+    </div>
+
+    <div class="box-footer" *ngIf="showButtons">
+      <button class="btn btn-danger" [disabled]="!enableButtons" (click)="delete('delete')"> Delete Metadata</button>
+      <button class="btn btn-danger" [disabled]="!enableButtons" style="margin-left: 0.3cm;" (click)="delete('deleteDir')"> Delete Metadata and Files</button>
+    </div>
+  </div>
+</div>
+

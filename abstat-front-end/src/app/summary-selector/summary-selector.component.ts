@@ -8,11 +8,13 @@ import { Summary} from '../summary';
 })
 export class SummarySelectorComponent implements OnInit {
   summaries: Summary[] = [];
+  @Input() getEverySummary: boolean;
+  @Input() showStorageAttributes: boolean;
+  @Input() allowSelection: boolean;
   @Output() onSummarySelected: EventEmitter<Summary>;
 
   constructor(private http: Http) {
     this.onSummarySelected = new EventEmitter<Summary>();
-
   }
 
   ngOnInit() {
@@ -20,8 +22,12 @@ export class SummarySelectorComponent implements OnInit {
   }
 
   obtainSummaries(): void {
+    let url = 'http://backend.abstat.disco.unimib.it/api/v1/summaries';
+    if (!this.getEverySummary)
+      url = url + '?loaded=true';
+
     let  data: JSON[];
-    this.http.get('http://backend.abstat.disco.unimib.it/api/v1/summaries?loaded=true')
+    this.http.get(url)
       .subscribe((res: Response) => {
         data = res.json().summaries;
         data.map((el: any) => {
@@ -34,6 +40,4 @@ export class SummarySelectorComponent implements OnInit {
   checked(summary: Summary): void {
     this.onSummarySelected.emit(summary);
   }
-
-
 }

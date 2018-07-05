@@ -1,0 +1,21 @@
+
+<div class="box-body" style="overflow: auto;">
+  <table id="example2" class="table table-bordered table-hover table-striped">
+    <thead>
+    <tr>
+      <th *ngIf="allowSelection">Select</th>
+      <th>Name</th>
+      <th>Timestamp</th>
+    </tr>
+    </thead>
+    <tbody >
+    <tr *ngFor="let item of items">
+      <td class = "text-center" *ngIf="allowSelection">
+        <input type="radio" name="radiogroup" (click)="checked(item)">
+      </td>
+      <td>{{item.name}}</td>
+      <td>{{item.timestamp}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

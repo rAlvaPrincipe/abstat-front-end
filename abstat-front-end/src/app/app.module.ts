@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
-import { RouterModule, Routes } from '@angular/router'
+import { RouterModule, Routes } from '@angular/router';
 
 
 import { AppComponent } from './app.component';
@@ -13,11 +13,14 @@ import { BrowseAutocompleteComponent } from './browse-autocomplete/browse-autoco
 import { HomeComponent } from './home/home.component';
 import { ConsolidateComponent } from './consolidate/consolidate.component';
 import { ApisComponent } from './apis/apis.component';
+import { ManageComponent } from './manage/manage.component';
+import { DatasetontologySelectorComponent } from './datasetontology-selector/datasetontology-selector.component';
 
 const appRoutes: Routes = [
   { path: 'browse', component: BrowseComponent },
   { path: 'home', component: HomeComponent},
   { path: 'consolidate', component: ConsolidateComponent},
+  { path: 'manage', component: ManageComponent},
   { path: 'apis', component: ApisComponent}
 ];
 
@@ -30,7 +33,9 @@ const appRoutes: Routes = [
     BrowseAutocompleteComponent,
     HomeComponent,
     ConsolidateComponent,
-    ApisComponent
+    ApisComponent,
+    ManageComponent,
+    DatasetontologySelectorComponent
   ],
   imports: [
     BrowserModule,

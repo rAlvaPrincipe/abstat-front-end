@@ -1,7 +1,19 @@
 
-<app-summary-selector
-  (onSummarySelected)="getSummary($event)">
-</app-summary-selector>
+<div class="col-md-12">
+  <div class="box box-info">
+    <div class="box-header">
+      <h3 class="box-title">Stored summaries</h3>
+    </div>
+
+    <app-summary-selector
+      [getEverySummary]="false"
+      [showStorageAttributes]="false"
+      [allowSelection]="true"
+      (onSummarySelected)="getSummary($event)">
+    </app-summary-selector>
+
+  </div>
+</div>
 
 
 <div *ngIf="show">
