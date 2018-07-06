@@ -15,11 +15,15 @@ import { ConsolidateComponent } from './consolidate/consolidate.component';
 import { ApisComponent } from './apis/apis.component';
 import { ManageComponent } from './manage/manage.component';
 import { DatasetontologySelectorComponent } from './datasetontology-selector/datasetontology-selector.component';
+import { SearchComponent } from './search/search.component';
+import { SearchFormComponent } from './search-form/search-form.component';
 
 const appRoutes: Routes = [
-  { path: 'browse', component: BrowseComponent },
+  { path: '', component: HomeComponent},
   { path: 'home', component: HomeComponent},
   { path: 'consolidate', component: ConsolidateComponent},
+  { path: 'browse', component: BrowseComponent },
+  { path: 'search', component: SearchComponent },
   { path: 'manage', component: ManageComponent},
   { path: 'apis', component: ApisComponent}
 ];
@@ -35,7 +39,9 @@ const appRoutes: Routes = [
     ConsolidateComponent,
     ApisComponent,
     ManageComponent,
-    DatasetontologySelectorComponent
+    DatasetontologySelectorComponent,
+    SearchComponent,
+    SearchFormComponent
   ],
   imports: [
     BrowserModule,

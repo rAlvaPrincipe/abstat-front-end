@@ -1,0 +1,39 @@
+<app-search-form
+  (onSubmit)="serveRequest($event)"
+  [searching]="searching">
+</app-search-form>
+
+<div class="col-md-12" *ngIf="show">
+  <div class="box box-info">
+    <div class="box-body" style="overflow: auto;">
+      <div class="box-body">
+        <ul class="list-unstyled">
+          <li><span class="fa fa-star-o" aria-hidden="true"></span> <small><strong>preferred </strong> concept / property / akp</small></li>
+        </ul>
+      </div>
+      <div >
+        <div class="box-body">
+          <div >
+            <ul class="list-inline"  style="margin-top: -10px;" *ngFor="let result of results">
+              <li><span class="label label-default">{{result.dataset}}</span></li>
+              <li><span class="label label-{{aslabel(result)}}">{{result.type}}</span></li>
+              <li *ngIf="result.subtype==='internal'"><span class="fa fa-star-o" aria-hidden="true"></span></li>
+              <li> <h4>{{prefix(result.subject)}}</h4> </li>
+              <li *ngIf="result.predicate"> <h4>{{prefix(result.predicate)}}</h4> </li>
+              <li *ngIf="result.object"> <h4>{{prefix(result.object)}}</h4> </li>
+              <li> ({{result.frequency}})</li>
+            </ul>
+          </div>
+          <div *ngIf="results.length == 0">
+            <h4>Nothing found!</h4>
+          </div>
+          <button ng-show="allDocuments" (click)="loadMore()" type="button" class="btn btn-deafult btn-block">
+            <span><strong>{{results.length}}</strong> results - get more</span>
+          </button>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
