@@ -30,7 +30,7 @@ export class ManageComponent {
   delete(command: string): void {
     const headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded'});
     const options = new RequestOptions({ headers: headers });
-    this.http.post('http://localhost/' + this.type + '/' + command + '/' + this.id, {}, options).subscribe(res => console.log(res.json()));
+    this.http.post('http://backend.abstat.disco.unimib.it/' + this.type + '/' + command + '/' + this.id, {}, options).subscribe(res => console.log(res.json()));
   }
 
 }
