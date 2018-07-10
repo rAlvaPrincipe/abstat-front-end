@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http } from '@angular/http';
 import { Summary} from '../summary';
+import {ApiService} from '../api.service';
 
 @Component({
   selector: 'app-summary-selector',
@@ -13,28 +14,17 @@ export class SummarySelectorComponent implements OnInit {
   @Input() allowSelection: boolean;
   @Output() onSummarySelected: EventEmitter<Summary>;
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private apiService: ApiService) {
     this.onSummarySelected = new EventEmitter<Summary>();
   }
 
   ngOnInit() {
-    this.obtainSummaries();
-  }
-
-  obtainSummaries(): void {
-    let url = 'http://backend.abstat.disco.unimib.it/api/v1/summaries';
-    if (!this.getEverySummary)
-      url = url + '?loaded=true';
-
-    let  data: JSON[];
-    this.http.get(url)
-      .subscribe((res: Response) => {
-        data = res.json().summaries;
-        data.map((el: any) => {
-          const summary: Summary = el;
-          this.summaries.push(summary);
-        });
-      });
+    if (!this.getEverySummary) {
+      this.summaries = this.apiService.getSummaries(true, null);
+    }
+    else {
+      this.summaries = this.apiService.getSummaries(null, null);
+    }
   }
 
   checked(summary: Summary): void {

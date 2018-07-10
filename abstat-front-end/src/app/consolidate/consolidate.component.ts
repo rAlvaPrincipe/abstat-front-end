@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Http, Headers, RequestOptions } from '@angular/http';
 import { Summary } from '../summary';
+import {ApiService} from '../api.service';
 
 @Component({
   selector: 'app-consolidate',
@@ -12,25 +13,13 @@ export class ConsolidateComponent implements OnInit {
   consolidate = new ConsolidateRequest();
 
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private apiService: ApiService) {
     this.summaries = [];
     this.showTB = false;
   }
 
   ngOnInit() {
-    this.getSummaries();
-  }
-
-  getSummaries(): void {
-    let data: JSON[];
-    this.http.get('http://backend.abstat.disco.unimib.it/api/v1/summaries')
-      .subscribe((res: Response) => {
-        data = res.json().summaries;
-        data.map((el: any) => {
-          const summary: Summary = el;
-          this.summaries.push(summary);
-        });
-      });
+    this.summaries = this.apiService.getSummaries(null, null);
   }
 
   showTextBox(event): void {
@@ -40,7 +29,7 @@ export class ConsolidateComponent implements OnInit {
       this.showTB = false;
   }
 
-  onFormSubmit(any:any): void {
+  onFormSubmit(): void {
     const data = 'summary=' + this.consolidate.summary + '&store=' + this.consolidate.stored + '&index=' + this.consolidate.indexed + '&domain=' + this.consolidate.domain;
     const headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
     const options = new RequestOptions({ headers: headers });

@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output, Input} from '@angular/core';
-import {Http, Response} from '@angular/http';
-import {Summary} from '../summary';
+import {Http} from '@angular/http';
+import {ApiService} from '../api.service';
 
 @Component({
   selector: 'app-search-form',
@@ -12,26 +12,14 @@ export class SearchFormComponent implements OnInit {
   datasets: Set<string>;
   request: SearchRequest;
 
-  constructor( private http: Http) {
+  constructor( private http: Http, private apiService: ApiService) {
     this.datasets = new Set<string>();
     this.onSubmit = new EventEmitter<SearchRequest>();
     this.request = new SearchRequest();
   }
 
   ngOnInit() {
-    this.getDatasets();
-  }
-
-  getDatasets(): void {
-    let  data: JSON[];
-    this.http.get('http://backend.abstat.disco.unimib.it/api/v1/summaries?indexed=true')
-      .subscribe((res: Response) => {
-        data = res.json().summaries;
-        data.map((el: any) => {
-          const summary: Summary = el;
-          this.datasets.add(summary.dsName);
-        });
-      });
+    this.datasets = this.apiService.getDatasetsWhichSummariesAreIndexed();
   }
 
   submitted(any: any): void {

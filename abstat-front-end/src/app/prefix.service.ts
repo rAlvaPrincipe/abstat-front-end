@@ -5,36 +5,6 @@ import { Injectable } from '@angular/core';
 })
 export class PrefixService {
 
-  constructor() { }
-
-  getExtendedURI(input: string): string {
-    const  prefix = input.substr(0, input.indexOf(':'))
-    let localname =  input.replace(prefix + ':', '');
-    let namespace: string;
-    for(const key in this.prefixes) {
-      if (this.prefixes[key] === prefix) {
-        namespace  = key;
-      }
-    }
-    if (!localname) {
-      namespace = input;
-      localname = '';
-    }
-    return namespace + localname;
-  }
-
-  prefix(uri: string): string {
-    const namespace = uri.match(/http[s]{0,1}:\/\/.*[/#]/g)[0];
-    let localname = ':' + uri.replace(namespace, '');
-    let prefix = this.prefixes[namespace];
-    if (!prefix) {
-      prefix = uri;
-      localname = '';
-    }
-    return prefix + localname;
-  }
-
-
   readonly prefixes = {
     'http://vocab.ub.uni-leipzig.de/bibrm/': 'bibrm',
     'http://purl.org/voc/vrank#': 'vrank',
@@ -1954,6 +1924,34 @@ export class PrefixService {
     'http://www4.wiwiss.fu-berlin.de/cordis/resource/cordis/': 'cordis',
     'http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/': 'bsbm',
     'http://pcdm.org/models#': 'pcdm',
-
   };
+
+  constructor() { }
+
+  getExtendedURI(input: string): string {
+    const  prefix = input.substr(0, input.indexOf(':'));
+    let localname =  input.replace(prefix + ':', '');
+    let namespace: string;
+    for (const key in this.prefixes) {
+      if (this.prefixes[key] === prefix) {
+        namespace  = key;
+      }
+    }
+    if (!localname) {
+      namespace = input;
+      localname = '';
+    }
+    return namespace + localname;
+  }
+
+  prefix(uri: string): string {
+    const namespace = uri.match(/http[s]{0,1}:\/\/.*[/#]/g)[0];
+    let localname = ':' + uri.replace(namespace, '');
+    let prefix = this.prefixes[namespace];
+    if (!prefix) {
+      prefix = uri;
+      localname = '';
+    }
+    return prefix + localname;
+  }
 }

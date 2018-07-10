@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {SearchResult} from '../search-result';
 import {Http, Response} from '@angular/http';
 import {PrefixService} from '../prefix.service';

@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter, ElementRef, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Akp} from '../akp';
 import { Summary} from '../summary';
