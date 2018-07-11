@@ -17,10 +17,14 @@ import { ManageComponent } from './manage/manage.component';
 import { DatasetontologySelectorComponent } from './datasetontology-selector/datasetontology-selector.component';
 import { SearchComponent } from './search/search.component';
 import { SearchFormComponent } from './search-form/search-form.component';
+import { DatasetontologyUploaderComponent } from './datasetontology-uploader/datasetontology-uploader.component';
+import { SummarizeComponent } from './summarize/summarize.component';
+import { SummarizeRecapComponent } from './summarize-recap/summarize-recap.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'home', component: HomeComponent},
+  { path: 'summarize', component: SummarizeComponent},
   { path: 'consolidate', component: ConsolidateComponent},
   { path: 'browse', component: BrowseComponent },
   { path: 'search', component: SearchComponent },
@@ -41,7 +45,10 @@ const appRoutes: Routes = [
     ManageComponent,
     DatasetontologySelectorComponent,
     SearchComponent,
-    SearchFormComponent
+    SearchFormComponent,
+    DatasetontologyUploaderComponent,
+    SummarizeComponent,
+    SummarizeRecapComponent
   ],
   imports: [
     BrowserModule,

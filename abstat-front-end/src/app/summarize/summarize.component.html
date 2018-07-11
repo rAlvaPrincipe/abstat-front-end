@@ -1,0 +1,73 @@
+<div *ngIf="!recap">
+  <div class="col-md-6">
+    <form #summarizeForm="ngForm" (ngSubmit)="onFormSubmit()">
+    <div class="box box-info">
+      <div class="box-header with-border">
+        <h3 class="box-title">Summarize</h3>
+      </div>
+        <div class="box-body">
+          <label>Choose a data set:</label>
+          <div class="form-group">
+            <select class="form-control" name="dataset" required [(ngModel)]="request.dataset">
+              <option [ngValue]="undefined" disabled  selected> Please select one</option>
+              <option *ngFor="let dataset of datasets" [ngValue]="dataset"> {{dataset.name}}</option>
+            </select>
+          </div>
+          <label>Choose an ontology</label>
+          <div class="form-group">
+            <select class="form-control"  name="ontology" [(ngModel)]="request.ontology">
+              <option [ngValue]="undefined" selected> no ontology </option>
+              <option *ngFor="let ontology of ontologies" [ngValue]="ontology"> {{ontology.name}} </option>
+            </select>
+          </div>
+
+          <label>Options:</label>
+          <div class="form-group">
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="concept_min" [(ngModel)]="request.concept_min">
+              Concept Minimalization
+            </label>
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="inference" [(ngModel)]="request.inference">
+              Inference
+            </label>
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="cardinality" [(ngModel)]="request.cardinality">
+              Cardinalities
+            </label>
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="property_min" [(ngModel)]="request.property_min">
+              Property Minimalization
+            </label>
+          </div>
+          </div>
+        </div>
+        <div class="box-footer">
+          <button type="submit" class="btn btn-primary" [disabled]="!summarizeForm.form.valid">Submit</button>
+        </div>
+    </div>
+    </form>
+  </div>
+
+  <div class="col-md-6">
+    <app-datasetontology-uploader
+    [mode]="'dataset'">
+    </app-datasetontology-uploader>
+    <app-datasetontology-uploader
+    [mode]="'ontology'">
+    </app-datasetontology-uploader>
+  </div>
+</div>
+
+<div *ngIf="recap">
+  <app-summarize-recap
+  [request]="request">
+  </app-summarize-recap>
+</div>

@@ -5,7 +5,7 @@ import {ApiService} from '../api.service';
 
 @Component({
   selector: 'app-summary-selector',
-  templateUrl: './summary-selector.component.html',
+  templateUrl: './summary-selector.component.html'
 })
 export class SummarySelectorComponent implements OnInit {
   summaries: Summary[] = [];

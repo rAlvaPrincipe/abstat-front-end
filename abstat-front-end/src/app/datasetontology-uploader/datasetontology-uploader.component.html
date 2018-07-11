@@ -1,0 +1,43 @@
+<div *ngIf="mode=== 'dataset'" class="box box-info">
+  <div class="box-header with-border">
+    <h3 class="box-title">Upload a dataset</h3>
+  </div>
+  <div class="box-body">
+    <div *ngIf="status === 'loaded'" class="alert alert-success alert-dismissible">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <p> Your dataset has been successfuly uploaded!</p>
+    </div>
+    <div class="form-group">
+      <input type="file" (change)="selectFile(fileInput.files)" #fileInput>
+      <p class="help-block">Data sets must have ".nt" extension</p>
+    </div>
+  </div>
+  <div class="box-footer" *ngIf="status !== 'loading'">
+    <button type="submit" class="btn btn-primary" (click)="upload()">Upload</button>
+  </div>
+  <div class="box-footer" *ngIf="status === 'loading'">
+    <button type="submit" class="btn btn-primary" [disabled]="true" (click)="upload()">Uploading <i class="fa fa-spinner fa-spin"></i> </button>
+  </div>
+</div>
+
+<div *ngIf="mode=== 'ontology'" class="box box-info">
+  <div class="box-header with-border">
+    <h3 class="box-title">Upload an ontology</h3>
+  </div>
+  <div class="box-body">
+    <div *ngIf="status === 'loaded'" class="alert alert-success alert-dismissible">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <p> Your dataset has been successfuly uploaded!</p>
+    </div>
+    <div class="form-group">
+      <input type="file" (change)="selectFile(fileInput.files)" #fileInput>
+      <p class="help-block">Ontologies must have ".owl" extension</p>
+    </div>
+  </div>
+  <div class="box-footer" *ngIf="status !== 'loading'">
+    <button type="submit" class="btn btn-primary" (click)="upload()">Upload</button>
+  </div>
+  <div class="box-footer" *ngIf="status === 'loading'">
+    <button type="submit" class="btn btn-primary" [disabled]="true" (click)="upload()">Uploading <i class="fa fa-spinner fa-spin"></i> </button>
+  </div>
+</div>
