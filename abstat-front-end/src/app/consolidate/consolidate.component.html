@@ -1,110 +1,114 @@
 <div class="col-xs-12">
   <form #userForm="ngForm" (ngSubmit)="onFormSubmit()">
-  <div class="box box-info">
-    <div class="box-header">
-      <h3 class="box-title">Available summaries</h3>
-    </div>
-    <div class="box-body" style="overflow: auto;">
-      <table id="example2" class="table table-bordered table-hover table-striped">
-        <thead>
-        <tr>
-          <th>Select</th>
-          <th>Dataset</th>
-          <th>Ontology</th>
-          <th>Timestamp</th>
-          <th class = "text-center">Concept Min.</th>
-          <th class = "text-center">Inference</th>
-          <th class = "text-center">Cardinality</th>
-          <th class = "text-center">Property Min.</th>
-          <th class = "text-center">Stored</th>
-          <th class = "text-center">Indexed</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let summary of summaries">
-          <td class = "text-center">
-            <input type="radio" name="summary" id="summaryRB"  value="{{summary.id}}" required [(ngModel)]="consolidate.summary"/>
-          </td>
-          <td>{{summary.dsName}}</td>
-          <td>{{summary.listOntNames[0]}}</td>
-          <td>{{summary.timestamp}}</td>
-          <td class = "text-center">
-            <span *ngIf="summary.tipoMinimo" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
-            <span *ngIf="!summary.tipoMinimo" class="glyphicon glyphicon-remove text-danger" style="color:red"></span>
-          </td>
-          <td class = "text-center">
-            <span *ngIf="summary.inferences" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
-            <span *ngIf="!summary.inferences" class="glyphicon glyphicon-remove text-danger" style="color:red"></span>
-          </td>
-          <td class = "text-center">
-            <span *ngIf="summary.cardinalita" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
-            <span *ngIf="!summary.cardinalita" class="glyphicon glyphicon-remove text-danger" style="color:red"></span>
-          </td>
-          <td class = "text-center">
-            <span *ngIf="summary.propertyMinimaliz" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
-            <span *ngIf="!summary.propertyMinimaliz" class="glyphicon glyphicon-remove text-danger" style="color:red"></span>
-          </td>
-          <td class = "text-center">
-            <span *ngIf="summary.loadedMongoDB" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
-            <span *ngIf="!summary.loadedMongoDB" class="glyphicon glyphicon-remove text-success" style="color:red"></span>
-          </td>
-          <td class = "text-center">
-            <span *ngIf="summary.indexedSolr" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
-            <span *ngIf="!summary.indexedSolr" class="glyphicon glyphicon-remove text-success" style="color:red"></span>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="box-body" style="overflow: auto;">
-      <table class="table table-bordered table-hover">
-        <thead>
-        <tr>
-          <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td>
-            <div class="checkbox"  style="margin-top: 0px; margin-bottom: 0px;">
-              <label>
-                <input type="checkbox" name="store" [(ngModel)]="consolidate.stored"/>
-                Store on the document database
-              </label>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="checkbox" style="margin-top: 0px; margin-bottom: 0px;">
-              <label>
-                <input type="checkbox" name="index" [(ngModel)]="consolidate.indexed" />
-                Index on the search engine
-              </label>
-            </div>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="box-body">
-      <div class="col-xs-2" style="margin-left: -6px;">
-        <label > Mark prefer patterns </label><br />
-        <select class="form-control" (click)="showTextBox($event)" >
-          <option selected="selected" value="Default" > Default </option>
-          <option value="Custom"> Custom </option>
-        </select>
+    <div class="box box-info">
+      <div class="box-header">
+        <h3 class="box-title">Available summaries</h3>
       </div>
-      <div *ngIf="showTB">
-        <input id="domain" [(ngModel)]="consolidate.domain" name="domain" type="text" class="form-control" style="margin-top: 0.7cm; width: 20%;" name="domain" placeholder="Insert a domain" />
+      <div class="box-body" style="overflow: auto;">
+        <table id="example2" class="table table-bordered table-hover table-striped">
+          <thead>
+          <tr>
+            <th>Select</th>
+            <th>Dataset</th>
+            <th>Ontology</th>
+            <th>Timestamp</th>
+            <th class = "text-center">Concept Min.</th>
+            <th class = "text-center">Inference</th>
+            <th class = "text-center">Cardinality</th>
+            <th class = "text-center">Property Min.</th>
+            <th class = "text-center">Stored</th>
+            <th class = "text-center">Indexed</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let summary of summaries">
+            <td class = "text-center">
+              <input type="radio" name="summary" id="summaryRB"  value="{{summary.id}}" required [(ngModel)]="consolidate.summary"/>
+            </td>
+            <td>{{summary.dsName}}</td>
+            <td>{{summary.listOntNames[0]}}</td>
+            <td>{{summary.timestamp}}</td>
+            <td class = "text-center">
+              <span *ngIf="summary.tipoMinimo" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
+              <span *ngIf="!summary.tipoMinimo" class="glyphicon glyphicon-remove text-danger" style="color:red"></span>
+            </td>
+            <td class = "text-center">
+              <span *ngIf="summary.inferences" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
+              <span *ngIf="!summary.inferences" class="glyphicon glyphicon-remove text-danger" style="color:red"></span>
+            </td>
+            <td class = "text-center">
+              <span *ngIf="summary.cardinalita" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
+              <span *ngIf="!summary.cardinalita" class="glyphicon glyphicon-remove text-danger" style="color:red"></span>
+            </td>
+            <td class = "text-center">
+              <span *ngIf="summary.propertyMinimaliz" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
+              <span *ngIf="!summary.propertyMinimaliz" class="glyphicon glyphicon-remove text-danger" style="color:red"></span>
+            </td>
+            <td class = "text-center">
+              <span *ngIf="summary.loadedMongoDB" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
+              <span *ngIf="!summary.loadedMongoDB" class="glyphicon glyphicon-remove text-success" style="color:red"></span>
+            </td>
+            <td class = "text-center">
+              <span *ngIf="summary.indexedSolr" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
+              <span *ngIf="!summary.indexedSolr" class="glyphicon glyphicon-remove text-success" style="color:red"></span>
+            </td>
+          </tr>
+          </tbody>
+        </table>
       </div>
+      <div class="box-body" style="overflow: auto;">
+        <table class="table table-bordered table-hover">
+          <thead>
+          <tr>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
+              <div class="checkbox"  style="margin-top: 0px; margin-bottom: 0px;">
+                <label>
+                  <input type="checkbox" name="store" [(ngModel)]="consolidate.stored"/>
+                  Store on the document database
+                </label>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="checkbox" style="margin-top: 0px; margin-bottom: 0px;">
+                <label>
+                  <input type="checkbox" name="index" [(ngModel)]="consolidate.indexed" />
+                  Index on the search engine
+                </label>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="box-body">
+        <div class="col-xs-2" style="margin-left: -6px;">
+          <label > Mark prefer patterns </label><br />
+          <select class="form-control" (click)="showTextBox($event)" >
+            <option selected="selected" value="Default" > Default </option>
+            <option value="Custom"> Custom </option>
+          </select>
+        </div>
+        <div *ngIf="showTB">
+          <input id="domain" [(ngModel)]="consolidate.domain" name="domain" type="text" class="form-control" style="margin-top: 0.7cm; width: 20%;" name="domain" placeholder="Insert a domain" />
+        </div>
+      </div>
+      <div class="box-footer">
+        <div *ngIf="!consolidating">
+          <button type="submit" class="btn btn-primary" [disabled]="!userForm.form.valid">Submit</button>
+        </div>
+        <div *ngIf="consolidating">
+          <button type="submit" class="btn btn-primary" [disabled]="true">Submit <i class="fa fa-spinner fa-spin"></i></button>
+        </div>
+      </div>
+      <!-- /.box-body -->
     </div>
-
-    <div class="box-footer">
-      <button type="submit" class="btn btn-primary" [disabled]="!userForm.form.valid">Submit</button>
-    </div>
-    <!-- /.box-body -->
-  </div>
-  <!-- /.box -->
+    <!-- /.box -->
   </form>
 </div>
