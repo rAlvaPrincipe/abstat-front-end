@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
@@ -20,6 +20,8 @@ import { SearchFormComponent } from './search-form/search-form.component';
 import { DatasetontologyUploaderComponent } from './datasetontology-uploader/datasetontology-uploader.component';
 import { SummarizeComponent } from './summarize/summarize.component';
 import { SummarizeRecapComponent } from './summarize-recap/summarize-recap.component';
+import {ConfigService} from "./config.service";
+import {HttpClientModule} from "@angular/common/http";
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
@@ -32,6 +34,9 @@ const appRoutes: Routes = [
   { path: 'apis', component: ApisComponent}
 ];
 
+export function initConfig(config: ConfigService) {
+  return () => config.getHost();
+}
 
 @NgModule({
   declarations: [
@@ -53,6 +58,7 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     HttpModule,
+    HttpClientModule,
     FormsModule,
     TypeaheadModule.forRoot(),
     RouterModule.forRoot(
@@ -60,7 +66,14 @@ const appRoutes: Routes = [
       { enableTracing: false }
     )
   ],
-  providers: [],
+  providers: [
+    ConfigService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initConfig,
+      deps: [ConfigService],
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

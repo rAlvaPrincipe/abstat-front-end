@@ -1,7 +1,7 @@
 import {Component, OnChanges, Input, SimpleChanges} from '@angular/core';
-import { Http, Response } from '@angular/http';
 import { Summary} from '../summary';
 import {PrefixService} from '../prefix.service';
+import {ApiService} from "../api.service";
 
 @Component({
   selector: 'app-browse-autocomplete',
@@ -16,7 +16,7 @@ export class BrowseAutocompleteComponent implements OnChanges  {
   results: string[] = [];
   constraint: string = '';
 
-  constructor(private http: Http, private  prefixService: PrefixService) {
+  constructor(private prefixService: PrefixService, private apiService: ApiService) {
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -25,42 +25,18 @@ export class BrowseAutocompleteComponent implements OnChanges  {
     }
   }
 
-
   obtainSuggestions(): void {
     this.results = [];
     let data: JSON[];
 
-    if (this.type === 'subject') {
-      this.http.get('http://backend.abstat.disco.unimib.it/api/v1/SPO?position=subject&summary=' + this.summary.id)
-        .subscribe((res: Response) => {
-          data = res.json().results;
-          data.map((el: any) => {
-            const result: string = this.prefix(el.subject);
-            this.results.push(result);
-          });
+    this.apiService.suggest(this.summary, this.type)
+      .subscribe((response) => {
+        data = response['results'];
+        data.map((el: any) => {
+          const result: string = this.prefix(el.result);
+          this.results.push(result);
         });
-    }
-    else if (this.type === 'predicate') {
-      this.http.get('http://backend.abstat.disco.unimib.it/api/v1/SPO?position=predicate&summary=' + this.summary.id)
-        .subscribe((res: Response) => {
-          data = res.json().results;
-          data.map((el: any) => {
-            const result: string = this.prefix(el.predicate);
-            this.results.push(result);
-          });
-        });
-    }
-    else {
-      this.http.get('http://backend.abstat.disco.unimib.it/api/v1/SPO?position=object&summary=' + this.summary.id)
-        .subscribe((res: Response) => {
-          data = res.json().results;
-          data.map((el: any) => {
-            const result: string = this.prefix(el.object);
-            this.results.push(result);
-          });
-        });
-    }
-
+      });
   }
 
   prefix(uri: string): string {

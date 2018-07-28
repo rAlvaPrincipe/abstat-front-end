@@ -1,5 +1,4 @@
 import {Component, EventEmitter, OnInit, Output, Input} from '@angular/core';
-import {Http} from '@angular/http';
 import {ApiService} from '../api.service';
 
 @Component({
@@ -12,7 +11,7 @@ export class SearchFormComponent implements OnInit {
   datasets: Set<string>;
   request: SearchRequest;
 
-  constructor( private http: Http, private apiService: ApiService) {
+  constructor(private apiService: ApiService) {
     this.datasets = new Set<string>();
     this.onSubmit = new EventEmitter<SearchRequest>();
     this.request = new SearchRequest();

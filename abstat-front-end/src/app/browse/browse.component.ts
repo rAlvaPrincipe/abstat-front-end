@@ -1,9 +1,9 @@
 import {Component, ViewChild} from '@angular/core';
-import { Http, Response } from '@angular/http';
 import { Akp} from '../akp';
 import { Summary} from '../summary';
 import {BrowseAutocompleteComponent} from '../browse-autocomplete/browse-autocomplete.component';
 import {PrefixService} from '../prefix.service';
+import {ApiService} from "../api.service";
 
 @Component({
   selector: 'app-browse',
@@ -24,7 +24,7 @@ export class BrowseComponent {
   @ViewChild('predAutocomplete') predicateRef: BrowseAutocompleteComponent;
   @ViewChild('objAutocomplete') objectRef: BrowseAutocompleteComponent;
 
-  constructor(private http: Http, private prefixService: PrefixService) {
+  constructor( private prefixService: PrefixService, private apiService: ApiService) {
     this.patterns = [];
     this.current_summary = null;
     this.limit = 20;
@@ -44,7 +44,7 @@ export class BrowseComponent {
     this.subjConstraint = '';
     this.predConstraint = '';
     this.objConstraint = '';
-    this.search();
+    this.browse();
   }
 
   filter() {
@@ -55,20 +55,20 @@ export class BrowseComponent {
 
     this.offset = 0;
     this.patterns = [];
-    this.search();
+    this.browse();
   }
 
   loadMore() {
     this.offset += 20;
     this.loadingPatterns = true;
-    this.search();
+    this.browse();
   }
 
-  search(): void {
+  browse(): void {
     let data: JSON[];
-    this.http.get('http://backend.abstat.disco.unimib.it/api/v1/browse?enrichWithSPO=true&summary=' + this.current_summary.id + '&subj=' + encodeURIComponent(this.subjConstraint) + '&pred=' + encodeURIComponent(this.predConstraint) + '&obj=' + encodeURIComponent(this.objConstraint) + '&limit=' + this.limit + '&offset=' + this.offset)
-      .subscribe((res: Response) => {
-        data = res.json().akps;
+    this.apiService.browse(this.current_summary, this.subjConstraint, this.predConstraint, this.objConstraint, this.limit, this.offset)
+      .subscribe((response) => {
+        data = response['akps'];
         data.map((el: any) => {
           const pattern: Akp = el;
           this.patterns.push(pattern);

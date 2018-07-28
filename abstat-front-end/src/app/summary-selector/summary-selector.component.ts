@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
-import { Http } from '@angular/http';
 import { Summary} from '../summary';
 import {ApiService} from '../api.service';
 
@@ -14,7 +13,7 @@ export class SummarySelectorComponent implements OnInit {
   @Input() allowSelection: boolean;
   @Output() onSummarySelected: EventEmitter<Summary>;
 
-  constructor(private http: Http, private apiService: ApiService) {
+  constructor(private apiService: ApiService) {
     this.onSummarySelected = new EventEmitter<Summary>();
   }
 

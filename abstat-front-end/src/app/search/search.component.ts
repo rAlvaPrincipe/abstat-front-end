@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import {SearchResult} from '../search-result';
-import {Http, Response} from '@angular/http';
 import {PrefixService} from '../prefix.service';
 import {SearchRequest} from '../search-form/search-form.component';
+import {ApiService} from "../api.service";
 
 @Component({
   selector: 'app-search',
@@ -14,7 +14,7 @@ export class SearchComponent {
   show: boolean;
   searching: boolean;
 
-  constructor(private http: Http, private prefixService: PrefixService) {
+  constructor( private prefixService: PrefixService, private apiService: ApiService) {
     this.results = [];
     this.request = new SearchRequest();
     this.show = false;
@@ -22,15 +22,10 @@ export class SearchComponent {
   }
 
   search(): void {
-    let url = 'http://backend.abstat.disco.unimib.it/api/v1/search?q=' + this.request.query + '&rows=' + this.request.rows + '&start=' + this.request.start + '&includeNPref=' + this.request.includeNPref;
-    if (this.request.dataset !== 'all') {
-      url +=  '&dataset=' + this.request.dataset;
-    }
-
     let  data: JSON[];
-    this.http.get(url)
-      .subscribe((res: Response) => {
-        data = res.json().results;
+    this.apiService.search(this.request)
+      .subscribe((response) => {
+        data = response['results'];
         data.map((el: any) => {
           const result: SearchResult = el;
           this.results.push(result);

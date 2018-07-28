@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import { Http } from '@angular/http';
 import {ApiService} from '../api.service';
 
 @Component({
@@ -12,7 +11,7 @@ export class DatasetontologySelectorComponent implements OnInit {
   @Input() allowSelection: boolean;
   @Output() onItemSelected: EventEmitter<string>;
 
-  constructor(private http: Http, private apiService: ApiService) {
+  constructor(private apiService: ApiService) {
     this.onItemSelected = new EventEmitter<string>();
   }
 

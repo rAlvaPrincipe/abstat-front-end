@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Headers, Http, RequestOptions} from '@angular/http';
+import {ApiService} from "../api.service";
 
 @Component({
   selector: 'app-manage',
@@ -13,7 +13,7 @@ export class ManageComponent {
   showButtons: boolean;
   managing: boolean;
 
-  constructor(private http: Http) {
+  constructor(private apiService: ApiService) {
     this.enableButtons = false;
     this.showButtons = false;
     this.managing = false;
@@ -31,11 +31,12 @@ export class ManageComponent {
 
   delete(command: string): void {
     this.managing = true;
-    const headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded'});
-    const options = new RequestOptions({ headers: headers });
-    this.http.post('http://backend.abstat.disco.unimib.it/' + this.type + '/' + command + '/' + this.id, {}, options).subscribe(res => {
-      location.reload();
-    });
+    this.apiService.manage(this.type, command, this.id)
+      .subscribe(response => {
+          location.reload();},
+        (err) => {
+          location.reload();
+        });
   }
 
 }
