@@ -1929,17 +1929,21 @@ export class PrefixService {
   constructor() { }
 
   getExtendedURI(input: string): string {
+    if(!input)
+      return "";
+
     const  prefix = input.substr(0, input.indexOf(':'));
     let localname =  input.replace(prefix + ':', '');
     let namespace: string;
+
     for (const key in this.prefixes) {
       if (this.prefixes[key] === prefix) {
         namespace  = key;
       }
     }
-    if (!localname) {
-      namespace = input;
-      localname = '';
+
+    if (namespace === "http://www.w3.org/2011/http#" && localname.startsWith("\/\/")) {
+      namespace = "http:";
     }
     return namespace + localname;
   }
