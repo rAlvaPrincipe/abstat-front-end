@@ -13,7 +13,7 @@ export class ConfigService {
 
   getHost(): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      this.http.get('http://localhost:4200/assets/config.json')
+      this.http.get('assets/config.json')
         .subscribe((response) => {
           this.backend = response['backend_host'];
           resolve(true);
