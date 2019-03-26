@@ -30,14 +30,21 @@
               <td>boolean value</td>
               <td>loaded=true</td>
               <td>yes</td>
-              <td>not specified value is considered as "don't care"</td>
+              <td>default value is "don't care"</td>
             </tr>
             <tr>
               <td>indexed</td>
               <td>boolean value</td>
               <td>indexed=false</td>
               <td>yes</td>
-              <td>not specified value is considered as "don't care"</td>
+              <td>default value is "don't care"</td>
+            </tr>
+            <tr>
+              <td>search</td>
+              <td>(string) search string </td>
+              <td>search=geo</td>
+              <td>yes</td>
+              <td>summaries whose origin dataset name contains the search string will be returned. Default is "don't care"</td>
             </tr>
             </tbody>
           </table>
@@ -189,11 +196,25 @@
               <td>default value is 0</td>
             </tr>
             <tr>
+              <td>subtype</td>
+              <td>(string) internal/external</td>
+              <td>subtype=internal</td>
+              <td>yes</td>
+              <td>not specified value is considered as "don't care"</td>
+            </tr>
+            <tr>
               <td>enrichWithSPO</td>
               <td>boolean value</td>
               <td>enrichWithSPO=true</td>
               <td>yes</td>
               <td>if true subject, predicate and object frequencies are showed</td>
+            </tr>
+            <tr>
+              <td>richCardinalities</td>
+              <td>boolean value</td>
+              <td>richCardinalities=true</td>
+              <td>yes</td>
+              <td>if true, raw cardinalities for subjs-obj and raw cardinalities for subj-objs will be included </td>
             </tr>
             </tbody>
           </table>

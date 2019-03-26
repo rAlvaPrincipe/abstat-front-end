@@ -38,6 +38,7 @@ export class SummarizationRequest {
   inference: boolean;
   cardinality: boolean;
   property_min: boolean;
+  rich_cardinalities: boolean;
   email: string;
 
   constructor() {
@@ -46,5 +47,6 @@ export class SummarizationRequest {
     this.inference = false;
     this.cardinality = false;
     this.property_min = false;
+    this.rich_cardinalities = false;
   }
 }
