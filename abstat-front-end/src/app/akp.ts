@@ -17,7 +17,8 @@ export class Akp {
     private _cardinality3: number,
     private _cardinality4: number,
     private _cardinality5: number,
-    private _cardinality6: number) {
+    private _cardinality6: number,
+    private _status: string) {
   }
 
   get subject(): Resource { return this._subject; }
@@ -64,4 +65,7 @@ export class Akp {
 
   get cardinality6(): number { return this._cardinality6; }
   set cardinality6(value: number) { this._cardinality6 = value; }
+
+  get status(): string { return this._status; }
+  set status(value: string) { this._status = value; }
 }

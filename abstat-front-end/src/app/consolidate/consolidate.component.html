@@ -16,6 +16,7 @@
             <th class = "text-center">Inference</th>
             <th class = "text-center">Cardinality</th>
             <th class = "text-center">Property Min.</th>
+            <th class = "text-center">Shacl Validation</th>
             <th class = "text-center">Stored</th>
             <th class = "text-center">Indexed</th>
           </tr>
@@ -43,6 +44,10 @@
             <td class = "text-center">
               <span *ngIf="summary.propertyMinimaliz" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
               <span *ngIf="!summary.propertyMinimaliz" class="glyphicon glyphicon-remove text-danger" style="color:red"></span>
+            </td>
+            <td class = "text-center">
+              <span *ngIf="summary.shaclValidation" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
+              <span *ngIf="!summary.shaclValidation" class="glyphicon glyphicon-remove text-danger" style="color:red"></span>
             </td>
             <td class = "text-center">
               <span *ngIf="summary.loadedMongoDB" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
