@@ -158,7 +158,8 @@ export class ApiService {
 
   summarize(request: SummarizationRequest): Observable<Object> {
     let data = 'dataset=' + request.dataset.id + '&concept_min=' + request.concept_min + '&inference=' + request.inference +
-      '&cardinality=' + request.cardinality + '&property_min=' + request.property_min + '&rich_cardinalities=' + request.rich_cardinalities + '&email=' + request.email;
+      '&cardinality=' + request.cardinality + '&property_min=' + request.property_min + '&rich_cardinalities=' + request.rich_cardinalities + '&email=' + request.email +
+      '&shacl_validation=' + request.shacl_validation;
     if (request.ontology !== undefined) {
       data += '&ontologies=' + request.ontology.id;
     }

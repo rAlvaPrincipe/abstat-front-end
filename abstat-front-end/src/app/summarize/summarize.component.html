@@ -53,10 +53,16 @@
                 Rich Cardinalities
               </label>
             </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" name="shacl_validation" [(ngModel)]="request.shacl_validation">
+                Shacl Validation
+              </label>
+            </div>
           </div>
         </div>
         <div class="box-footer">
-          <button type="submit" class="btn btn-primary" [disabled]="!summarizeForm.form.valid">Submit</button>
+          <button type="submit" class="btn btn-primary" [disabled]="!summarizeForm.form.valid || (request.shacl_validation && !request.cardinality)">Submit</button>
         </div>
       </div>
     </form>

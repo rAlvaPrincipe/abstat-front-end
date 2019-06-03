@@ -9,6 +9,7 @@ export class Summary {
     private _inferences: boolean,
     private _cardinalita: boolean,
     private _propertyMinimaliz: boolean,
+    private _shaclValidation: boolean,
     private _loadedMongoDB: boolean,
     private _indexedSolr: boolean) {
   }
@@ -36,6 +37,9 @@ export class Summary {
 
   get propertyMinimaliz(): boolean { return this._propertyMinimaliz; }
   set propertyMinimaliz(value: boolean) { this._propertyMinimaliz = value; }
+
+  get shaclValidation(): boolean { return this._shaclValidation; }
+  set shaclValidation(value: boolean) { this._shaclValidation = value; }
 
   get loadedMongoDB(): boolean { return this._loadedMongoDB; }
   set loadedMongoDB(value: boolean) { this._loadedMongoDB = value; }

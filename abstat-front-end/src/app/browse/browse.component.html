@@ -34,6 +34,7 @@
             <th>Max subj-objs</th>
             <th>Avg subj-objs</th>
             <th>Min subj-objs</th>
+            <th>Validation</th>
           </tr>
           <tr>
             <td>
@@ -63,6 +64,9 @@
             <td>{{item.cardinality4}}</td>
             <td>{{item.cardinality5}}</td>
             <td>{{item.cardinality6}}</td>
+            <td *ngIf="item.status=='valid'">OK</td>
+            <td *ngIf="item.status=='invalid'">KO</td>
+            <td *ngIf="item.status=='not validated'">-</td>
           </tr>
         </table>
         <div *ngIf="!loadingPatterns">

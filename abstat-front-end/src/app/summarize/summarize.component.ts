@@ -39,6 +39,7 @@ export class SummarizationRequest {
   cardinality: boolean;
   property_min: boolean;
   rich_cardinalities: boolean;
+  shacl_validation: boolean;
   email: string;
 
   constructor() {
@@ -48,5 +49,6 @@ export class SummarizationRequest {
     this.cardinality = false;
     this.property_min = false;
     this.rich_cardinalities = false;
+    this.shacl_validation = false;
   }
 }
