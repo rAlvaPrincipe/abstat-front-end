@@ -34,7 +34,7 @@
             <th>Max subj-objs</th>
             <th>Avg subj-objs</th>
             <th>Min subj-objs</th>
-            <th>Validation</th>
+            <th style="min-width: 110px;">Severity</th>
           </tr>
           <tr>
             <td>
@@ -64,9 +64,14 @@
             <td>{{item.cardinality4}}</td>
             <td>{{item.cardinality5}}</td>
             <td>{{item.cardinality6}}</td>
-            <td *ngIf="item.status=='valid'">OK</td>
-            <td *ngIf="item.status=='invalid'">KO</td>
-            <td *ngIf="item.status=='not validated'">-</td>
+            <td *ngIf="item.status=='valid'" class="glyphicon glyphicon-ok text-success" style="color:green" ></td>
+            <td *ngIf="item.status=='invalid'">
+              <span   class="glyphicon glyphicon-remove text-danger" style="color:red;margin-right: 10px;"></span>
+              <button type="button" class="btn btn-default btn-sm">
+                details
+              </button>
+            </td>
+            <td><ng-template>-</ng-template></td>
           </tr>
         </table>
         <div *ngIf="!loadingPatterns">
