@@ -1,4 +1,4 @@
-<div *ngIf="mode=== 'dataset'" class="box box-info">
+<div *ngIf="mode=== 'dataset'" [ngClass]="cluster  ? 'box box-warning' : 'box box-info'">
   <div class="box-header with-border">
     <h3 class="box-title">Upload a dataset</h3>
   </div>
@@ -20,7 +20,7 @@
   </div>
 </div>
 
-<div *ngIf="mode=== 'ontology'" class="box box-info">
+<div *ngIf="mode=== 'ontology'" [ngClass]="cluster  ? 'box box-warning' : 'box box-info'">
   <div class="box-header with-border">
     <h3 class="box-title">Upload an ontology</h3>
   </div>

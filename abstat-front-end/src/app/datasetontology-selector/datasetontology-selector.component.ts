@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ApiService} from '../api.service';
+import {Dataset} from '../dataset';
 
 @Component({
   selector: 'app-datasetontology-selector',
@@ -9,23 +10,22 @@ export class DatasetontologySelectorComponent implements OnInit {
   items: any[] = [];
   @Input() type: string;
   @Input() allowSelection: boolean;
-  @Output() onItemSelected: EventEmitter<string>;
+  @Output() onItemSelected: EventEmitter<Dataset>;
 
   constructor(private apiService: ApiService) {
-    this.onItemSelected = new EventEmitter<string>();
+    this.onItemSelected = new EventEmitter<Dataset>();
   }
 
   ngOnInit() {
     if (this.type === 'dataset') {
-      this.items = this.apiService.getDatasets();
-    }
-    else {
-      this.items = this.apiService.getOntologies();
+      this.items = this.apiService.getDatasets(null, null);
+    } else {
+      this.items = this.apiService.getOntologies(null, null);
     }
   }
 
-  checked(arg: any): void {
-    this.onItemSelected.emit(arg.id);
+  checked(arg: Dataset): void {
+    this.onItemSelected.emit(arg);
   }
 
 }

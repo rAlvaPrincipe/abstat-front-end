@@ -7,6 +7,7 @@ import {HttpClient} from "@angular/common/http";
 export class ConfigService {
 
   backend: string;
+  cluster_backend: string;
 
   constructor(private http: HttpClient) {
   }
@@ -16,13 +17,18 @@ export class ConfigService {
       this.http.get('assets/config.json')
         .subscribe((response) => {
           this.backend = response['backend_host'];
+          this.cluster_backend = response['distributed-backend_host'];
           resolve(true);
         });
-    })
+    });
   }
 
-  getbackend(): string {
+  getBackend(): string {
     return this.backend;
+  }
+
+  getClusterBackend(): string {
+    return this.cluster_backend;
   }
 
 }

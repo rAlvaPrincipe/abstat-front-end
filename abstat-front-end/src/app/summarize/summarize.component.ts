@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, Output, OnInit, EventEmitter} from '@angular/core';
 import {Dataset} from '../dataset';
 import {Ontology} from '../ontology';
 import {ApiService} from '../api.service';
@@ -12,8 +12,11 @@ export class SummarizeComponent implements OnInit {
   datasets: Dataset[];
   ontologies: Ontology[];
   recap: boolean;
+  _cluster: boolean;
+  @Output() onSubmit: EventEmitter<SummarizationRequest>;
 
   constructor(private apiService: ApiService) {
+    this.onSubmit = new EventEmitter<SummarizationRequest>();
     this.request = new SummarizationRequest();
     this.datasets = [];
     this.ontologies = [];
@@ -21,19 +24,50 @@ export class SummarizeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.datasets = this.apiService.getDatasets();
-    this.ontologies = this.apiService.getOntologies();
+    this.cluster = false;
+    this.datasets = this.apiService.getDatasets(true, false);
+    this.ontologies = this.apiService.getOntologies(true, false);
   }
 
   onFormSubmit() {
     this.recap = true;
+    this.onSubmit.emit(this.request);
   }
+
+
+  @Input()
+  set cluster(cluster: boolean) {
+    this._cluster  = cluster;
+    this.clear();
+  }
+
+
+  clear () {
+    this.request = new SummarizationRequest();
+    if (!this._cluster) {
+      this.request.cluster = false;
+      this.datasets = this.apiService.getDatasets(true, false);
+      this.ontologies = this.apiService.getOntologies(true, false);
+    } else {
+      this.request.cluster = true;
+      this.datasets = this.apiService.getDatasets(false, true);
+      this.ontologies = this.apiService.getOntologies(false, true);
+    }
+    this.request.concept_min = false;
+    this.request.inference = false;
+    this.request.cardinality = false;
+    this.request.property_min = false;
+    this.request.rich_cardinalities = false;
+    this.request.shacl_validation = false;
+  }
+
 }
 
 
 export class SummarizationRequest {
   dataset: Dataset;
   ontology: Ontology;
+  cluster: boolean;
   concept_min: boolean;
   inference: boolean;
   cardinality: boolean;

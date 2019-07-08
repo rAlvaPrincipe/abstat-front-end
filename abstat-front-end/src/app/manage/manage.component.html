@@ -16,23 +16,22 @@
     <div *ngIf="type === 'submitconfig'">
       <app-summary-selector
         [getEverySummary]="true"
-        [showStorageAttributes]="true"
-        [allowSelection]="true"
-        (onSummarySelected)="setId($event.id)">
+        [profile]="'manage'"
+        (onSummarySelected)="setObj($event.id, $event.server)">
       </app-summary-selector>
     </div>
     <div *ngIf="type === 'ontology'">
       <app-datasetontology-selector
         [type]="'ontology'"
         [allowSelection]="true"
-        (onItemSelected)="setId($event)">
+        (onItemSelected)="setObj($event.id, $event.server)">
       </app-datasetontology-selector>
     </div>
     <div *ngIf="type === 'dataset'">
       <app-datasetontology-selector
         [type]="'dataset'"
         [allowSelection]="true"
-        (onItemSelected)="setId($event)">
+        (onItemSelected)="setObj($event.id, $event.server)">
       </app-datasetontology-selector>
     </div>
     <div class="box-footer" *ngIf="showButtons">

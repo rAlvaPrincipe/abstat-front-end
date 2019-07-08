@@ -1,1 +1,1 @@
-{ "backend_host": "http://backend.abstat.disco.unimib.it" }
+{ "backend_host": "http://backend.abstat.disco.unimib.it", "distributed-backend_host": "http://siti-rack.siti.disco.unimib.it" }

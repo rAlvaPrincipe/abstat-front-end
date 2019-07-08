@@ -1,7 +1,6 @@
-<div *ngIf="!recap">
-  <div class="col-md-6">
+ <div class="col-md-6">
     <form #summarizeForm="ngForm" (ngSubmit)="onFormSubmit()">
-      <div class="box box-info">
+      <div [ngClass]="_cluster  ? 'box box-warning' : 'box box-info'">
         <div class="box-header with-border">
           <h3 class="box-title">Summarize</h3>
         </div>
@@ -29,7 +28,7 @@
                 Concept Minimalization
               </label>
             </div>
-            <div class="checkbox">
+            <div class="checkbox" *ngIf="!_cluster">
               <label>
                 <input type="checkbox" name="inference" [(ngModel)]="request.inference">
                 Inference
@@ -41,19 +40,19 @@
                 Cardinalities
               </label>
             </div>
-            <div class="checkbox">
+            <div class="checkbox" *ngIf="!_cluster">
               <label>
                 <input type="checkbox" name="property_min" [(ngModel)]="request.property_min">
                 Property Minimalization
               </label>
             </div>
-            <div class="checkbox">
+            <div class="checkbox" *ngIf="!_cluster">
               <label>
                 <input type="checkbox" name="rich_cardinalities" [(ngModel)]="request.rich_cardinalities">
                 Rich Cardinalities
               </label>
             </div>
-            <div class="checkbox">
+            <div class="checkbox" *ngIf="!_cluster">
               <label>
                 <input type="checkbox" name="shacl_validation" [(ngModel)]="request.shacl_validation">
                 Shacl Validation
@@ -62,24 +61,8 @@
           </div>
         </div>
         <div class="box-footer">
-          <button type="submit" class="btn btn-primary" [disabled]="!summarizeForm.form.valid || (request.shacl_validation && !request.cardinality)">Submit</button>
+          <button type="submit" class="btn btn-primary" [disabled]="!summarizeForm.form.valid|| (request.shacl_validation && !request.cardinality)">Submit</button>
         </div>
       </div>
     </form>
   </div>
-
-  <div class="col-md-6">
-    <app-datasetontology-uploader
-      [mode]="'dataset'">
-    </app-datasetontology-uploader>
-    <app-datasetontology-uploader
-      [mode]="'ontology'">
-    </app-datasetontology-uploader>
-  </div>
-</div>
-
-<div *ngIf="recap">
-  <app-summarize-recap
-    [request]="request">
-  </app-summarize-recap>
-</div>

@@ -3,7 +3,7 @@ import { Akp} from '../akp';
 import { Summary} from '../summary';
 import {BrowseAutocompleteComponent} from '../browse-autocomplete/browse-autocomplete.component';
 import {PrefixService} from '../prefix.service';
-import {ApiService} from "../api.service";
+import {ApiService} from '../api.service';
 
 @Component({
   selector: 'app-browse',

@@ -22,11 +22,12 @@ import { SummarizeComponent } from './summarize/summarize.component';
 import { SummarizeRecapComponent } from './summarize-recap/summarize-recap.component';
 import {ConfigService} from "./config.service";
 import {HttpClientModule} from "@angular/common/http";
+import { BackendSelectorComponent } from './backend-selector/backend-selector.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'home', component: HomeComponent},
-  { path: 'summarize', component: SummarizeComponent},
+  { path: 'summarize', component: BackendSelectorComponent},
   { path: 'consolidate', component: ConsolidateComponent},
   { path: 'browse', component: BrowseComponent },
   { path: 'search', component: SearchComponent },
@@ -53,7 +54,8 @@ export function initConfig(config: ConfigService) {
     SearchFormComponent,
     DatasetontologyUploaderComponent,
     SummarizeComponent,
-    SummarizeRecapComponent
+    SummarizeRecapComponent,
+    BackendSelectorComponent
   ],
   imports: [
     BrowserModule,

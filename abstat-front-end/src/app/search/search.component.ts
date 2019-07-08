@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {SearchResult} from '../search-result';
 import {PrefixService} from '../prefix.service';
 import {SearchRequest} from '../search-form/search-form.component';
-import {ApiService} from "../api.service";
+import {ApiService} from '../api.service';
 
 @Component({
   selector: 'app-search',

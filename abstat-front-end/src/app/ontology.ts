@@ -4,7 +4,8 @@ export class Ontology {
     private _id: string,
     private _name: string,
     private _timestamp: string,
-  ){
+    private _server: string
+  ) {
   }
 
   get id(): string { return this._id; }
@@ -15,4 +16,7 @@ export class Ontology {
 
   get timestamp(): string { return this._timestamp; }
   set timestamp(value: string) { this._timestamp = value; }
+
+  get server(): string { return this._server; }
+  set server(value: string) { this._server = value; }
 }

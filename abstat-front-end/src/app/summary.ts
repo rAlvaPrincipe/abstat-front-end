@@ -5,6 +5,7 @@ export class Summary {
     private _dsName: string,
     private _listOntNames: string[],
     private _timestamp: string,
+    private _server: string,
     private _tipoMinimo: boolean,
     private _inferences: boolean,
     private _cardinalita: boolean,
@@ -25,6 +26,9 @@ export class Summary {
 
   get timestamp(): string { return this._timestamp; }
   set timestamp(value: string) { this._timestamp = value; }
+
+  get server(): string { return this._server; }
+  set server(value: string) { this._server = value; }
 
   get tipoMinimo(): boolean { return this._tipoMinimo; }
   set tipoMinimo(value: boolean) { this._tipoMinimo = value; }

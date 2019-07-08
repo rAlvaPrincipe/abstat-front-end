@@ -14,14 +14,16 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 })
 export class ApiService {
   baseUrl: string;
+  clusterBaseUrl: string
 
   constructor(private http: HttpClient, private configService: ConfigService) {
-    this.baseUrl = this.configService.getbackend();
+    this.baseUrl = this.configService.getBackend();
+    this.clusterBaseUrl = this.configService.getClusterBackend();
   }
 
   /********************************************* GET Requests *******************************************************/
 
-  getDatasets(): Dataset[] {
+  getDatasets(singleM: boolean, cluster: boolean): Dataset[] {
     const datasets: Dataset[] = [];
     let data: JSON[];
     this.http.get(this.baseUrl + '/api/v1/datasets')
@@ -29,14 +31,19 @@ export class ApiService {
         data = response['datasets'];
         data.map((el: any) => {
           const dataset: Dataset = el;
-          datasets.push(dataset);
+          if (singleM && dataset.server === 'single-machine' || cluster && dataset.server === 'cluster') {
+            datasets.push(dataset);
+          }
+          else if (singleM === null && cluster === null) {
+            datasets.push(dataset);
+          }
         });
       });
     return datasets;
   }
 
 
-  getOntologies(): Ontology[] {
+  getOntologies(singleM: boolean, cluster: boolean): Ontology[] {
     const ontologies: Ontology[] = [];
     let data: JSON[];
     this.http.get(this.baseUrl + '/api/v1/ontologies')
@@ -44,7 +51,12 @@ export class ApiService {
         data = response['ontologies'];
         data.map((el: any) => {
           const ontology: Ontology = el;
-          ontologies.push(ontology);
+          if (singleM && ontology.server === 'single-machine' || cluster && ontology.server === 'cluster') {
+            ontologies.push(ontology);
+          }
+          else if (singleM === null && cluster === null) {
+            ontologies.push(ontology);
+          }
         });
       });
     return ontologies;
@@ -116,9 +128,9 @@ export class ApiService {
 
   /********************************************* POST Requests *******************************************************/
 
-
-  consolidate(request: ConsolidateRequest): Observable<Object> {
-    const data = 'summary=' + request.summary + '&store=' + request.stored +
+  consolidate(cluster: boolean, request: ConsolidateRequest): Observable<Object> {
+    const url = this.getUrl(cluster);
+    const data = 'summary=' + request.summary.id + '&store=' + request.stored +
       '&index=' + request.indexed + '&domain=' + request.domain;
     const httpOptions = {
       headers: new HttpHeaders({
@@ -126,18 +138,18 @@ export class ApiService {
         'Authorization': 'my-auth-token'
       })
     };
-    return this.http.post(this.baseUrl + '/consolidate', data, httpOptions);
+    return this.http.post(url + '/consolidate', data, httpOptions);
   }
 
 
-  upload(file: File, mode: string): Observable<Object> {
+  upload(cluster: boolean, file: File, mode: string): Observable<Object> {
     const httpOptions = {
       headers: new HttpHeaders()
     };
     const formData = new FormData();
     formData.append('file', file);
 
-    let url = this.baseUrl;
+    let url = this.getUrl(cluster);
     if (mode === 'dataset') {
       url += '/upload/ds';
     } else {
@@ -146,17 +158,19 @@ export class ApiService {
     return this.http.post(url, formData, httpOptions);
   }
 
-  manage(type: string, command: string, id: string): Observable<Object> {
+  manage(cluster: boolean, type: string, command: string, id: string): Observable<Object> {
+    const url = this.getUrl(cluster);
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded',
         'Authorization': 'my-auth-token'
       })
     };
-    return this.http.post(this.baseUrl + '/' + type + '/' + command + '/' + id, {}, httpOptions);
+    return this.http.post(url + '/' + type + '/' + command + '/' + id, {}, httpOptions);
   }
 
-  summarize(request: SummarizationRequest): Observable<Object> {
+  summarize(cluster: boolean, request: SummarizationRequest): Observable<Object> {
+    const url = this.getUrl(cluster);
     let data = 'dataset=' + request.dataset.id + '&concept_min=' + request.concept_min + '&inference=' + request.inference +
       '&cardinality=' + request.cardinality + '&property_min=' + request.property_min + '&rich_cardinalities=' + request.rich_cardinalities + '&email=' + request.email +
       '&shacl_validation=' + request.shacl_validation;
@@ -169,7 +183,21 @@ export class ApiService {
         'Authorization': 'my-auth-token'
       })
     };
-    return this.http.post(this.baseUrl + '/summarizator', data, httpOptions);
+    return this.http.post(url + '/summarizator', data, httpOptions);
+  }
+
+
+
+  /********************************************* Utils *******************************************************/
+
+  getUrl(cluster: boolean): string{
+    let url = '';
+    if (cluster) {
+      url = this.clusterBaseUrl;
+    } else {
+      url = this.baseUrl;
+    }
+    return url;
   }
 
 }

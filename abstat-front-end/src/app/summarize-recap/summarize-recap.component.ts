@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {SummarizationRequest} from '../summarize/summarize.component';
-import {ApiService} from "../api.service";
+import {ApiService} from '../api.service';
 
 @Component({
   selector: 'app-summarize-recap',
@@ -16,7 +16,7 @@ export class SummarizeRecapComponent {
 
   onFormSubmit(): void {
     this.submitted = true;
-    this.apiService.summarize(this.request)
+    this.apiService.summarize(this.request.cluster, this.request)
       .subscribe(res =>
         console.log(res));
   }

@@ -2,8 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import { Summary } from '../summary';
 import {ApiService} from '../api.service';
 import {Router} from '@angular/router';
-import {HttpErrorResponse} from "@angular/common/http";
-
 
 @Component({
   selector: 'app-consolidate',
@@ -12,7 +10,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 export class ConsolidateComponent implements OnInit {
   summaries: Summary[];
   showTB: boolean;
-  consolidate = new ConsolidateRequest();
+  request = new ConsolidateRequest();
   consolidating: boolean;
 
 
@@ -27,17 +25,27 @@ export class ConsolidateComponent implements OnInit {
   }
 
   showTextBox(event): void {
-    if(event.target.value === 'Custom')
+    if (event.target.value === 'Custom') {
       this.showTB = true;
-    else
+    } else {
       this.showTB = false;
+    }
+  }
+
+  setSummary(selection: Summary): void {
+    this.request.summary = selection;
   }
 
   onFormSubmit(): void {
+    let cluster = false;
+    if (this.request.summary.server === 'cluster') {
+      cluster = true;
+    }
+
     this.consolidating = true;
-    this.apiService.consolidate(this.consolidate)
+    this.apiService.consolidate(cluster, this.request)
       .subscribe(response => {
-          location.reload();},
+         location.reload();},
         (err) => {
           location.reload();
         });
@@ -47,7 +55,7 @@ export class ConsolidateComponent implements OnInit {
 
 export class ConsolidateRequest {
 
-  public summary: string;
+  public summary: Summary;
   public stored: boolean;
   public indexed: boolean;
   public domain: String;

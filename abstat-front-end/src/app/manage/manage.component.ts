@@ -9,6 +9,7 @@ export class ManageComponent {
 
   type: string;
   id: string;
+  server: string;
   enableButtons: boolean;
   showButtons: boolean;
   managing: boolean;
@@ -19,21 +20,28 @@ export class ManageComponent {
     this.managing = false;
   }
 
-  setId(id: string): void {
+  setObj(id: string, server: string): void {
     this.id = id;
+    this.server = server;
     this.enableButtons = true;
   }
 
-  onTypeSelection(): void{
+  onTypeSelection(): void {
     this.enableButtons = false;
     this.showButtons = true;
   }
 
   delete(command: string): void {
     this.managing = true;
-    this.apiService.manage(this.type, command, this.id)
+
+    let cluster = false;
+    if (this.server === 'cluster') {
+      cluster = true;
+    }
+
+    this.apiService.manage(cluster, this.type, command, this.id)
       .subscribe(response => {
-          location.reload();},
+          location.reload(); },
         (err) => {
           location.reload();
         });

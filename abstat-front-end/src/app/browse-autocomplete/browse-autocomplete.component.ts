@@ -1,7 +1,7 @@
 import {Component, OnChanges, Input, SimpleChanges} from '@angular/core';
 import { Summary} from '../summary';
 import {PrefixService} from '../prefix.service';
-import {ApiService} from "../api.service";
+import {ApiService} from '../api.service';
 
 @Component({
   selector: 'app-browse-autocomplete',
