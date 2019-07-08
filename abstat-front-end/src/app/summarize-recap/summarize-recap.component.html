@@ -1,5 +1,5 @@
 <div class="col-md-6">
-  <div [ngClass]="request.server === 'cluster'  ? 'box box-warning' : 'box box-info'" class="box box-info">
+  <div [ngClass]="request.cluster  ? 'box box-warning' : 'box box-info'" class="box box-info">
     <div class="box-header">
       <h3 class="box-title">Your Configuration</h3>
     </div>
@@ -24,8 +24,8 @@
         </tr>
         <tr>
           <td>Server</td>
-          <td *ngIf="request.server === 'cluster'"> cluster </td>
-          <td *ngIf="request.server === 'single-machine'"> single-machine </td>
+          <td *ngIf="request.cluster"> cluster </td>
+          <td *ngIf="!request.cluster"> single-machine </td>
         </tr>
         <tr>
           <td>Concept Minimalization</td>
@@ -34,7 +34,7 @@
             <span *ngIf="!request.concept_min" class="glyphicon glyphicon-remove text-danger" style="color:red"></span>
           </td>
         </tr>
-        <tr *ngIf="request.server === 'single-machine'">
+        <tr *ngIf="!request.cluster">
           <td>Inference</td>
           <td>
             <span *ngIf="request.inference" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
@@ -48,21 +48,21 @@
             <span *ngIf="!request.cardinality" class="glyphicon glyphicon-remove text-danger" style="color:red"></span>
           </td>
         </tr>
-        <tr *ngIf="request.server === 'single-machine'">
+        <tr *ngIf="!request.cluster">
           <td>Property Minimalization</td>
           <td>
             <span *ngIf="request.property_min" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
             <span *ngIf="!request.property_min" class="glyphicon glyphicon-remove text-danger" style="color:red"></span>
           </td>
         </tr>
-        <tr *ngIf="request.server === 'single-machine'">
+        <tr *ngIf="!request.cluster">
           <td>Rich Cardinalities</td>
           <td>
             <span *ngIf="request.rich_cardinalities" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
             <span *ngIf="!request.rich_cardinalities" class="glyphicon glyphicon-remove text-danger" style="color:red"></span>
           </td>
         </tr>
-        <tr *ngIf="request.server === 'single-machine'">
+        <tr *ngIf="!request.cluster">
           <td>Shacl Validation</td>
           <td>
             <span *ngIf="request.shacl_validation" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
