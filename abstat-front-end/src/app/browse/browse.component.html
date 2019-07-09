@@ -52,17 +52,25 @@
 
           <tr  *ngFor="let item of patterns">
             <td class = "text-center"><i class="fa fa-{{isInternal(item)}}" ></i></td>
-            <td> <a href="{{item.subject.globalURL}}" target="_blank">{{prefix(item.subject.globalURL)}} </a></td>
-            <td> <a href="{{item.predicate.globalURL}}" target="_blank">{{prefix(item.predicate.globalURL)}} </a></td>
-            <td> <a href="{{item.object.globalURL}}" target="_blank">{{prefix(item.object.globalURL)}} </a></td>
+            <td> <a href="{{item.subject.globalURL}}" target="_blank">{{prefix(item.subject.globalURL)}}</a>  ({{item.subject.frequency}})</td>
+            <td> <a href="{{item.predicate.globalURL}}" target="_blank">{{prefix(item.predicate.globalURL)}}</a>  ({{item.predicate.frequency}})</td>
+            <td> <a href="{{item.object.globalURL}}" target="_blank">{{prefix(item.object.globalURL)}}</a> ({{item.object.frequency}})</td>
             <td>{{item.frequency}}</td>
-            <td>{{item.numberOfInstances}}</td>
-            <td>{{item.cardinality1}}</td>
-            <td>{{item.cardinality2}}</td>
-            <td>{{item.cardinality3}}</td>
-            <td>{{item.cardinality4}}</td>
-            <td>{{item.cardinality5}}</td>
-            <td>{{item.cardinality6}}</td>
+            <td *ngIf="item.numberOfInstances != undefined">{{item.numberOfInstances}}</td>
+            <td *ngIf="item.numberOfInstances == undefined" class="text-center">-</td>
+            <td *ngIf="item.cardinality1 != undefined">{{item.cardinality1}}</td>
+            <td *ngIf="item.cardinality1 == undefined" class="text-center">-</td>
+            <td *ngIf="item.cardinality2 != undefined">{{item.cardinality2}}</td>
+            <td *ngIf="item.cardinality2 == undefined" class="text-center">-</td>
+            <td *ngIf="item.cardinality3 != undefined">{{item.cardinality3}}</td>
+            <td *ngIf="item.cardinality3 == undefined" class="text-center">-</td>
+            <td *ngIf="item.cardinality4 != undefined">{{item.cardinality4}}</td>
+            <td *ngIf="item.cardinality4 == undefined" class="text-center">-</td>
+            <td *ngIf="item.cardinality5 != undefined">{{item.cardinality5}}</td>
+            <td *ngIf="item.cardinality5 == undefined" class="text-center">-</td>
+            <td *ngIf="item.cardinality6 != undefined">{{item.cardinality6}}</td>
+            <td *ngIf="item.cardinality6 == undefined" class="text-center">-</td>
+            <td *ngIf="item.status == undefined" class="text-center">-</td>
             <td *ngIf="item.status=='valid'" class="glyphicon glyphicon-ok text-success" style="color:green" ></td>
             <td *ngIf="item.status=='invalid'">
               <span   class="glyphicon glyphicon-remove text-danger" style="color:red;margin-right: 10px;"></span>
