@@ -4,6 +4,7 @@
         <thead>
           <tr>
             <th *ngIf="_profile.selector">Select</th>
+            <th *ngIf="_profile.id">ID</th>
             <th *ngIf="_profile.dataset">Dataset</th>
             <th *ngIf="_profile.ontology">Ontology</th>
             <th *ngIf="_profile.timestamp">Timestamp</th>
@@ -22,6 +23,7 @@
             <td class = "text-center" *ngIf="_profile.selector">
               <input type="radio" name="radiogroup" (click)="checked(summary)">
             </td>
+            <td *ngIf="_profile.id">{{summary.id}}</td>
             <td *ngIf="_profile.dataset">{{summary.dsName}}</td>
             <td *ngIf="_profile.ontology">{{summary.listOntNames[0]}}</td>
             <td *ngIf="_profile.timestamp">{{summary.timestamp}}</td>
