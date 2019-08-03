@@ -2,7 +2,11 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 
-<input [(ngModel)]="constraint"
-       [typeahead]="results"
-       class="form-control">
-
+<ng2-completer  class="completer-limit"
+  [(ngModel)]="constraint"
+  [datasource]="dataService"
+  [minSearchLength]="2"
+  [placeholder]="type"
+  [fillHighlighted]=false
+  [matchClass]="'match'">
+</ng2-completer>

@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import {APP_INITIALIZER, NgModule} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { RouterModule, Routes } from '@angular/router';
 
 
@@ -20,9 +19,10 @@ import { SearchFormComponent } from './search-form/search-form.component';
 import { DatasetontologyUploaderComponent } from './datasetontology-uploader/datasetontology-uploader.component';
 import { SummarizeComponent } from './summarize/summarize.component';
 import { SummarizeRecapComponent } from './summarize-recap/summarize-recap.component';
-import {ConfigService} from "./config.service";
-import {HttpClientModule} from "@angular/common/http";
+import {ConfigService} from './config.service';
+import {HttpClientModule} from '@angular/common/http';
 import { BackendSelectorComponent } from './backend-selector/backend-selector.component';
+import { Ng2CompleterModule } from 'ng2-completer';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
@@ -62,7 +62,7 @@ export function initConfig(config: ConfigService) {
     HttpModule,
     HttpClientModule,
     FormsModule,
-    TypeaheadModule.forRoot(),
+    Ng2CompleterModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false }
