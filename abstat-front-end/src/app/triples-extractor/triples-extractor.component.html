@@ -1,0 +1,63 @@
+
+<div class="col-md-12">
+  <div class="box box-info">
+    <div class="box-header">
+      <h3 class="box-title">Matches</h3>
+    </div>
+
+    <app-match-selector *ngIf="akp !== undefined"
+      [cardinalityType]="'MaxSubjObjs'"
+      [akp]="akp"
+      (onMatchSelected)="getTriples($event)">
+    </app-match-selector>
+
+  </div>
+</div>
+
+
+<div class="col-md-12">
+  <div class="box box-info">
+    <div class="box-header">
+      <h3 class="box-title">Matches</h3>
+    </div>
+
+    <app-match-selector *ngIf="akp !== undefined"
+                        [cardinalityType]="'MaxSubjsObj'"
+                        [akp]="akp"
+                        (onMatchSelected)="getTriples($event)">
+    </app-match-selector>
+
+  </div>
+</div>
+
+<div *ngIf="show">
+  <div class="col-md-12">
+    <div class="box box-info">
+      <div class="box-header">
+        <h3 class="box-title">Triples</h3>
+      </div>
+      <div class="box-body" style="overflow: auto;">
+        <table class="table table-bordered table-hover table-striped">
+          <tr>
+            <th>subject</th>
+            <th>predicate</th>
+            <th>object</th>
+          </tr>
+          <tr  *ngFor="let item of triples">
+            <td> <a href="{{item.subj}}" target="_blank"> {{prefix(item.subj)}}</a></td>
+            <td> <a href="{{item.pred}}" target="_blank"> {{prefix(item.pred)}}</a></td>
+            <td *ngIf="akp.type =='Datatype AKP'">{{item.obj}}</td>
+            <td *ngIf="this.akp.type === 'Object AKP'"><a href="{{item.obj}}" target="_blank"> {{prefix(item.obj)}}</a></td>
+
+          </tr>
+        </table>
+        <div *ngIf="!loadingTriples">
+          <button (click)="loadMore()" type="button" class="btn btn-deafult btn-block"> <strong>{{triples.length}}</strong> triples found - get more  </button>
+        </div>
+        <div *ngIf="loadingTriples">
+          <button (click)="loadMore()" type="button" class="btn btn-deafult btn-block"> <strong>{{triples.length}}</strong> triples found - get more <i class="fa fa-spinner fa-spin"></i>  </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

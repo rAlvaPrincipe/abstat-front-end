@@ -1,0 +1,47 @@
+
+<div class="box-body" style="overflow: auto;">
+  <table *ngIf="direct" class="table table-bordered table-hover table-striped">
+    <tr>
+      <th>Inspect</th>
+      <th>nsubjs</th>
+      <th>predicate</th>
+      <th>object</th>
+    </tr>
+    <tr  *ngFor="let item of triples">
+      <td class = "text-center" >
+        <input type="radio" name="radiogroup" (click)="checked(item.obj)">
+      </td>
+      <td> {{item.nsubjs}}</td>
+      <td> <a href="{{item.pred}}" target="_blank"> {{prefix(item.pred)}}</a></td>
+      <td *ngIf="akp.type =='Datatype AKP'">{{item.obj}}</td>
+      <td *ngIf="akp.type === 'Object AKP'"><a href="{{item.obj}}" target="_blank"> {{prefix(item.obj)}}</a></td>
+
+    </tr>
+  </table>
+
+  <table *ngIf="!direct" class="table table-bordered table-hover table-striped">
+    <tr>
+      <th>Inspect</th>
+      <th>subject</th>
+      <th>predicate</th>
+      <th>nobjs</th>
+    </tr>
+    <tr  *ngFor="let item of triples">
+      <td class = "text-center" >
+        <input type="radio" name="radiogroup" (click)="checked(item.subj)">
+      </td>
+      <td> <a href="{{item.subj}}" target="_blank"> {{prefix(item.subj)}}</a></td>
+      <td> <a href="{{item.pred}}" target="_blank"> {{prefix(item.pred)}}</a></td>
+      <td> {{item.nobjs}} </td>
+    </tr>
+  </table>
+
+  <div *ngIf="!loadingTriples">
+    <button (click)="loadMore()" type="button" class="btn btn-deafult btn-block"> <strong>{{triples.length}}</strong> matches found - get more  </button>
+  </div>
+  <div *ngIf="loadingTriples">
+    <button (click)="loadMore()" type="button" class="btn btn-deafult btn-block"> <strong>{{triples.length}}</strong> matches found - get more <i class="fa fa-spinner fa-spin"></i>  </button>
+  </div>
+
+
+</div>

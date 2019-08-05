@@ -2,65 +2,65 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 
-    <div class="box-body" style="overflow: auto;">
-      <table id="example2" class="table table-bordered table-hover table-striped">
-        <thead>
-          <tr>
-            <th *ngIf="_profile.selector">Select</th>
-            <th *ngIf="_profile.id">ID</th>
-            <th *ngIf="_profile.dataset">Dataset</th>
-            <th *ngIf="_profile.ontology">Ontology</th>
-            <th *ngIf="_profile.timestamp">Timestamp</th>
-            <th *ngIf="_profile.server">Server</th>
-            <th *ngIf="_profile.tipoMinimo" class = "text-center">Concept Min.</th>
-            <th *ngIf="_profile.inference" class = "text-center">Inference</th>
-            <th *ngIf="_profile.cardinality" class = "text-center">Cardinality</th>
-            <th *ngIf="_profile.propertyMinimaliz" class = "text-center">Property Min.</th>
-            <th *ngIf="_profile.shaclValidation" class = "text-center">Shacl Validation</th>
-            <th *ngIf="_profile.loadedMongoDB" class = "text-center">Stored</th>
-            <th *ngIf="_profile.indexedSolr" class = "text-center">Indexed</th>
-          </tr>
-        </thead>
-        <tbody >
-          <tr *ngFor="let summary of summaries">
-            <td class = "text-center" *ngIf="_profile.selector">
-              <input type="radio" name="radiogroup" (click)="checked(summary)">
-            </td>
-            <td *ngIf="_profile.id">{{summary.id}}</td>
-            <td *ngIf="_profile.dataset">{{summary.dsName}}</td>
-            <td *ngIf="_profile.ontology">{{summary.listOntNames[0]}}</td>
-            <td *ngIf="_profile.timestamp">{{summary.timestamp}}</td>
-            <td *ngIf="_profile.server">{{summary.server}}</td>
-            <td  *ngIf="_profile.tipoMinimo" class = "text-center">
-              <span *ngIf="summary.tipoMinimo" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
-              <span *ngIf="!summary.tipoMinimo" class="glyphicon glyphicon-remove text-danger" style="color:red"></span>
-            </td>
-            <td *ngIf="_profile.inference" class = "text-center">
-              <span *ngIf="summary.inferences" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
-              <span *ngIf="!summary.inferences" class="glyphicon glyphicon-remove text-danger" style="color:red"></span>
-            </td>
-            <td *ngIf="_profile.cardinality" class = "text-center">
-              <span *ngIf="summary.cardinalita" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
-              <span *ngIf="!summary.cardinalita" class="glyphicon glyphicon-remove text-danger" style="color:red"></span>
-            </td>
-            <td  *ngIf="_profile.propertyMinimaliz" class = "text-center">
-              <span *ngIf="summary.propertyMinimaliz" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
-              <span *ngIf="!summary.propertyMinimaliz" class="glyphicon glyphicon-remove text-danger" style="color:red"></span>
-            </td>
-            <td *ngIf="_profile.shaclValidation" class = "text-center">
-              <span *ngIf="summary.shaclValidation" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
-              <span *ngIf="!summary.shaclValidation" class="glyphicon glyphicon-remove text-danger" style="color:red"></span>
-            </td>
-            <td *ngIf="_profile.loadedMongoDB" class="text-center">
-              <span *ngIf="summary.loadedMongoDB" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
-              <span *ngIf="!summary.loadedMongoDB" class="glyphicon glyphicon-remove text-success" style="color:red"></span>
-            </td>
-            <td *ngIf="_profile.indexedSolr" class="text-center">
-              <span *ngIf="summary.indexedSolr" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
-              <span *ngIf="!summary.indexedSolr" class="glyphicon glyphicon-remove text-success" style="color:red"></span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+<div class="box-body" style="overflow: auto;">
+  <table id="example2" class="table table-bordered table-hover table-striped">
+    <thead>
+    <tr>
+      <th *ngIf="_profile.selector">Select</th>
+      <th *ngIf="_profile.id">ID</th>
+      <th *ngIf="_profile.dataset">Dataset</th>
+      <th *ngIf="_profile.ontology">Ontology</th>
+      <th *ngIf="_profile.timestamp">Timestamp</th>
+      <th *ngIf="_profile.server">Server</th>
+      <th *ngIf="_profile.tipoMinimo" class = "text-center">Concept Min.</th>
+      <th *ngIf="_profile.inference" class = "text-center">Inference</th>
+      <th *ngIf="_profile.cardinality" class = "text-center">Cardinality</th>
+      <th *ngIf="_profile.propertyMinimaliz" class = "text-center">Property Min.</th>
+      <th *ngIf="_profile.shaclValidation" class = "text-center">Shacl Validation</th>
+      <th *ngIf="_profile.loadedMongoDB" class = "text-center">Stored</th>
+      <th *ngIf="_profile.indexedSolr" class = "text-center">Indexed</th>
+    </tr>
+    </thead>
+    <tbody >
+    <tr *ngFor="let summary of summaries">
+      <td class = "text-center" *ngIf="_profile.selector">
+        <input type="radio" name="radiogroup" (click)="checked(summary)">
+      </td>
+      <td *ngIf="_profile.id">{{summary.id}}</td>
+      <td *ngIf="_profile.dataset">{{summary.dsName}}</td>
+      <td *ngIf="_profile.ontology">{{summary.listOntNames[0]}}</td>
+      <td *ngIf="_profile.timestamp">{{summary.timestamp}}</td>
+      <td *ngIf="_profile.server">{{summary.server}}</td>
+      <td  *ngIf="_profile.tipoMinimo" class = "text-center">
+        <span *ngIf="summary.tipoMinimo" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
+        <span *ngIf="!summary.tipoMinimo" class="glyphicon glyphicon-remove text-danger" style="color:red"></span>
+      </td>
+      <td *ngIf="_profile.inference" class = "text-center">
+        <span *ngIf="summary.inferences" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
+        <span *ngIf="!summary.inferences" class="glyphicon glyphicon-remove text-danger" style="color:red"></span>
+      </td>
+      <td *ngIf="_profile.cardinality" class = "text-center">
+        <span *ngIf="summary.cardinalita" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
+        <span *ngIf="!summary.cardinalita" class="glyphicon glyphicon-remove text-danger" style="color:red"></span>
+      </td>
+      <td  *ngIf="_profile.propertyMinimaliz" class = "text-center">
+        <span *ngIf="summary.propertyMinimaliz" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
+        <span *ngIf="!summary.propertyMinimaliz" class="glyphicon glyphicon-remove text-danger" style="color:red"></span>
+      </td>
+      <td *ngIf="_profile.shaclValidation" class = "text-center">
+        <span *ngIf="summary.shaclValidation" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
+        <span *ngIf="!summary.shaclValidation" class="glyphicon glyphicon-remove text-danger" style="color:red"></span>
+      </td>
+      <td *ngIf="_profile.loadedMongoDB" class="text-center">
+        <span *ngIf="summary.loadedMongoDB" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
+        <span *ngIf="!summary.loadedMongoDB" class="glyphicon glyphicon-remove text-success" style="color:red"></span>
+      </td>
+      <td *ngIf="_profile.indexedSolr" class="text-center">
+        <span *ngIf="summary.indexedSolr" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
+        <span *ngIf="!summary.indexedSolr" class="glyphicon glyphicon-remove text-success" style="color:red"></span>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
 

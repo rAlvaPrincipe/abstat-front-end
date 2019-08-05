@@ -23,6 +23,8 @@ import {ConfigService} from './config.service';
 import {HttpClientModule} from '@angular/common/http';
 import { BackendSelectorComponent } from './backend-selector/backend-selector.component';
 import { Ng2CompleterModule } from 'ng2-completer';
+import { TriplesExtractorComponent } from './triples-extractor/triples-extractor.component';
+import { MatchSelectorComponent } from './match-selector/match-selector.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
@@ -32,7 +34,8 @@ const appRoutes: Routes = [
   { path: 'browse', component: BrowseComponent },
   { path: 'search', component: SearchComponent },
   { path: 'manage', component: ManageComponent},
-  { path: 'apis', component: ApisComponent}
+  { path: 'apis', component: ApisComponent},
+  { path: 'extractor', component: TriplesExtractorComponent}
 ];
 
 export function initConfig(config: ConfigService) {
@@ -55,7 +58,9 @@ export function initConfig(config: ConfigService) {
     DatasetontologyUploaderComponent,
     SummarizeComponent,
     SummarizeRecapComponent,
-    BackendSelectorComponent
+    BackendSelectorComponent,
+    TriplesExtractorComponent,
+    MatchSelectorComponent
   ],
   imports: [
     BrowserModule,

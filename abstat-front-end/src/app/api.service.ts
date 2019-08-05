@@ -8,13 +8,14 @@ import {SearchRequest} from './search-form/search-form.component';
 import {ConsolidateRequest} from './consolidate/consolidate.component';
 import {SummarizationRequest} from './summarize/summarize.component';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {ExtractorRequest} from './match-selector/match-selector.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
   baseUrl: string;
-  clusterBaseUrl: string
+  clusterBaseUrl: string;
 
   constructor(private http: HttpClient, private configService: ConfigService) {
     this.baseUrl = this.configService.getBackend();
@@ -33,8 +34,7 @@ export class ApiService {
           const dataset: Dataset = el;
           if (singleM && dataset.server === 'single-machine' || cluster && dataset.server === 'cluster') {
             datasets.push(dataset);
-          }
-          else if (singleM === null && cluster === null) {
+          } else if (singleM === null && cluster === null) {
             datasets.push(dataset);
           }
         });
@@ -53,8 +53,7 @@ export class ApiService {
           const ontology: Ontology = el;
           if (singleM && ontology.server === 'single-machine' || cluster && ontology.server === 'cluster') {
             ontologies.push(ontology);
-          }
-          else if (singleM === null && cluster === null) {
+          } else if (singleM === null && cluster === null) {
             ontologies.push(ontology);
           }
         });
@@ -103,8 +102,8 @@ export class ApiService {
   }
 
 
-  browse(summary: Summary, subjConstraint, predConstraint, objConstraint, limit, offset): Observable<Object> {
-    return this.http.get(this.baseUrl + '/api/v1/browse?enrichWithSPO=true&summary=' + summary.id +
+  browse(summary: string, subjConstraint, predConstraint, objConstraint, limit, offset): Observable<Object> {
+    return this.http.get(this.baseUrl + '/api/v1/browse?enrichWithSPO=true&summary=' + summary +
       '&subj=' + encodeURIComponent(subjConstraint) + '&pred=' + encodeURIComponent(predConstraint) +
       '&obj=' + encodeURIComponent(objConstraint) + '&limit=' + limit + '&offset=' + offset);
   }
@@ -123,6 +122,36 @@ export class ApiService {
 
   suggest(summary: Summary, position: string): Observable<Object> {
     return this.http.get(this.baseUrl + '/api/v1/SPO?position=' + position + '&summary=' + summary.id);
+  }
+
+
+  extractMatches(request: ExtractorRequest): Observable<Object>{
+    const url = this.baseUrl + '/groupedExtractor?subj=' + encodeURIComponent(request.subj) +
+      '&pred=' + encodeURIComponent(request.pred) +
+      '&obj=' + encodeURIComponent(request.obj) +
+      '&dataset=' + request.dataset +
+      '&ontology=' + request.ontology +
+      '&akpType=' + request.akpType +
+      '&predictedCardinality=' + request.predictedCardinality +
+      '&cardinalityType=' + request.cardinalityType +
+      '&limit=' + request.limit +
+      '&offset=' + request.offset;
+
+    return this.http.get(url);
+  }
+
+  extractTriples(request: ExtractorRequest): Observable<Object>{
+    const url = this.baseUrl + '/singleExtractor?subj=' + encodeURIComponent(request.subj) +
+      '&pred=' + encodeURIComponent(request.pred) +
+      '&obj=' + encodeURIComponent(request.obj) +
+      '&dataset=' + request.dataset +
+      '&ontology=' + request.ontology +
+      '&akpType=' + request.akpType +
+      '&cardinalityType=' + request.cardinalityType +
+      '&limit=' + request.limit +
+      '&offset=' + request.offset;
+
+    return this.http.get(url);
   }
 
 

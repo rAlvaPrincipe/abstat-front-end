@@ -9,7 +9,7 @@ export class Akp {
     private _type: string,
     private _subType: string,
     private _datasetOfOrigin: string,
-    private _ontologyOfOrigin: string,
+    private _ontologiesOfOrigin: string[],
     private _frequency: number,
     private _numberOfInstances: number,
     private _cardinality1: number,
@@ -18,6 +18,8 @@ export class Akp {
     private _cardinality4: number,
     private _cardinality5: number,
     private _cardinality6: number,
+    private _predictedCardinalityDirect: number,
+    private _predictedCardinalityInverse: number,
     private _status: string) {
   }
 
@@ -39,8 +41,8 @@ export class Akp {
   get datasetOfOrigin(): string { return this._datasetOfOrigin; }
   set datasetOfOrigin(value: string) { this._datasetOfOrigin = value; }
 
-  get ontologyOfOrigin(): string { return this._ontologyOfOrigin; }
-  set ontologyOfOrigin(value: string) { this._ontologyOfOrigin = value; }
+  get ontologiesOfOrigin(): string[] { return this._ontologiesOfOrigin; }
+  set ontologiesOfOrigin(value: string[]) { this._ontologiesOfOrigin = value; }
 
   get frequency(): number { return this._frequency; }
   set frequency(value: number) { this._frequency = value; }
@@ -65,6 +67,13 @@ export class Akp {
 
   get cardinality6(): number { return this._cardinality6; }
   set cardinality6(value: number) { this._cardinality6 = value; }
+
+  get predictedCardinalityDirect(): number { return this._predictedCardinalityDirect; }
+  set predictedCardinalityDirect(value: number) { this._predictedCardinalityDirect = value; }
+
+  get predictedCardinalityInverse(): number { return this._predictedCardinalityInverse; }
+  set predictedCardinalityInverse(value: number) { this._predictedCardinalityInverse = value; }
+
 
   get status(): string { return this._status; }
   set status(value: string) { this._status = value; }

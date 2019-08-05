@@ -66,7 +66,7 @@ export class BrowseComponent {
 
   browse(): void {
     let data: JSON[];
-    this.apiService.browse(this.current_summary, this.subjConstraint, this.predConstraint, this.objConstraint, this.limit, this.offset)
+    this.apiService.browse(this.current_summary.id, this.subjConstraint, this.predConstraint, this.objConstraint, this.limit, this.offset)
       .subscribe((response) => {
         data = response['akps'];
         data.map((el: any) => {
@@ -92,5 +92,8 @@ export class BrowseComponent {
     return 'star-o';
   }
 
+  encodeURL(url: string): string{
+    return encodeURIComponent(url);
+  }
 }
 
