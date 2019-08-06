@@ -1951,13 +1951,18 @@ export class PrefixService {
   }
 
   prefix(uri: string): string {
-    const namespace = uri.match(/http[s]{0,1}:\/\/.*[/#]/g)[0];
-    let localname = ':' + uri.replace(namespace, '');
-    let prefix = this.prefixes[namespace];
-    if (!prefix) {
-      prefix = uri;
-      localname = '';
+    const variabile = uri.match(/http[s]{0,1}:\/\/.*[/#]/g);
+    if (variabile != null) {
+      const namespace = variabile[0];
+      let localname = ':' + uri.replace(namespace, '');
+      let prefix = this.prefixes[namespace];
+      if (!prefix) {
+        prefix = uri;
+        localname = '';
+      }
+      return prefix + localname;
+    } else {
+      return uri;
     }
-    return prefix + localname;
   }
 }
