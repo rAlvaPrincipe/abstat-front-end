@@ -53,6 +53,7 @@ export class TriplesExtractorComponent  implements OnInit{
     this.triples = [];
     this.show = false;
     this.request = triplesRequest;
+    this.request.limit = 10;
     this.request.offset = 0;
     this.query();
   }
@@ -83,6 +84,15 @@ export class TriplesExtractorComponent  implements OnInit{
 
   prefix(uri: string): string {
     return this.prefixService.prefix(uri);
+  }
+
+
+  status(): string {
+    if (this.akp.status === 'warning') {
+      return 'warning';
+    } else {
+      return 'danger';
+    }
   }
 
 }

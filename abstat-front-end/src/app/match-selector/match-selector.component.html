@@ -1,11 +1,12 @@
 
 <div class="box-body" style="overflow: auto;">
-  <table *ngIf="direct" class="table table-bordered table-hover table-striped">
+
+  <table *ngIf="triples.length > 0 && direct" class="table table-bordered table-hover table-striped">
     <tr>
       <th>Inspect</th>
-      <th>nsubjs</th>
-      <th>predicate</th>
-      <th>object</th>
+      <th># Distinct Subjects</th>
+      <th>Predicate</th>
+      <th>Object</th>
     </tr>
     <tr  *ngFor="let item of triples">
       <td class = "text-center" >
@@ -15,16 +16,15 @@
       <td> <a href="{{item.pred}}" target="_blank"> {{prefix(item.pred)}}</a></td>
       <td *ngIf="akp.type =='Datatype AKP'">{{item.obj}}</td>
       <td *ngIf="akp.type === 'Object AKP'"><a href="{{item.obj}}" target="_blank"> {{prefix(item.obj)}}</a></td>
-
     </tr>
   </table>
 
-  <table *ngIf="!direct" class="table table-bordered table-hover table-striped">
+  <table *ngIf="triples.length > 0 && !direct" class="table table-bordered table-hover table-striped">
     <tr>
       <th>Inspect</th>
-      <th>subject</th>
-      <th>predicate</th>
-      <th>nobjs</th>
+      <th>Subject</th>
+      <th>Predicate</th>
+      <th># Distinct Objects</th>
     </tr>
     <tr  *ngFor="let item of triples">
       <td class = "text-center" >
@@ -36,12 +36,13 @@
     </tr>
   </table>
 
-  <div *ngIf="!loadingTriples">
-    <button (click)="loadMore()" type="button" class="btn btn-deafult btn-block"> <strong>{{triples.length}}</strong> matches found - get more  </button>
-  </div>
-  <div *ngIf="loadingTriples">
-    <button (click)="loadMore()" type="button" class="btn btn-deafult btn-block"> <strong>{{triples.length}}</strong> matches found - get more <i class="fa fa-spinner fa-spin"></i>  </button>
-  </div>
-
+  <div *ngIf="triples.length > 0; then thenBlock else elseBlock"></div>
+  <ng-template #thenBlock>
+    <button *ngIf="!loadingTriples" (click)="loadMore()" type="button" class="btn btn-deafult btn-block"> <strong>{{triples.length}}</strong> matches found - get more  </button>
+    <button *ngIf="loadingTriples" (click)="loadMore()" type="button" class="btn btn-deafult btn-block"> <strong>{{triples.length}}</strong> matches found - get more <i class="fa fa-spinner fa-spin"></i> </button>
+  </ng-template>
+  <ng-template #elseBlock>
+    <button type="button" class="btn btn-deafult disabled btn-block"> <strong>0</strong> matches found  </button>
+  </ng-template>
 
 </div>

@@ -1,28 +1,79 @@
 
-<div class="col-md-12">
-  <div class="box box-info">
+  <div class="col-md-12">
+    <div class="box box-{{status()}}">
+      <div class="box-body" style="overflow: auto;">
+        <table *ngIf="akp !== undefined" class="table table-bordered table-hover table-striped">
+          <tr>
+            <th>Subject Type <small>(occurrences)</small> </th>
+            <th>Predicate <small>(occurrences)</small></th>
+            <th>Object Type <small>(occurrences)</small></th>
+            <th>Frequency</th>
+            <th>Instances</th>
+            <th>Max Subjs-Obj</th>
+            <th>Avg Subjs-Obj</th>
+            <th>Min Subjs-Obj</th>
+            <th>Max Subj-Objs</th>
+            <th>Avg Subj-Objs</th>
+            <th>Min Subj-Objs</th>
+            <th>Severity</th>
+          </tr>
+          <tr>
+            <td> <a href="{{akp.subject.globalURL}}" target="_blank">{{prefix(akp.subject.globalURL)}}</a>  ({{akp.subject.frequency}})</td>
+            <td> <a href="{{akp.predicate.globalURL}}" target="_blank">{{prefix(akp.predicate.globalURL)}}</a>  ({{akp.predicate.frequency}})</td>
+            <td> <a href="{{akp.object.globalURL}}" target="_blank">{{prefix(akp.object.globalURL)}}</a> ({{akp.object.frequency}})</td>
+            <td>{{akp.frequency}}</td>
+            <td *ngIf="akp.numberOfInstances != undefined">{{akp.numberOfInstances}}</td>
+            <td *ngIf="akp.numberOfInstances == undefined" class="text-center">-</td>
+            <td *ngIf="akp.cardinality1 != undefined">{{akp.cardinality1}}</td>
+            <td *ngIf="akp.cardinality1 == undefined" class="text-center">-</td>
+            <td *ngIf="akp.cardinality2 != undefined">{{akp.cardinality2}}</td>
+            <td *ngIf="akp.cardinality2 == undefined" class="text-center">-</td>
+            <td *ngIf="akp.cardinality3 != undefined">{{akp.cardinality3}}</td>
+            <td *ngIf="akp.cardinality3 == undefined" class="text-center">-</td>
+            <td *ngIf="akp.cardinality4 != undefined">{{akp.cardinality4}}</td>
+            <td *ngIf="akp.cardinality4 == undefined" class="text-center">-</td>
+            <td *ngIf="akp.cardinality5 != undefined">{{akp.cardinality5}}</td>
+            <td *ngIf="akp.cardinality5 == undefined" class="text-center">-</td>
+            <td *ngIf="akp.cardinality6 != undefined">{{akp.cardinality6}}</td>
+            <td *ngIf="akp.cardinality6 == undefined" class="text-center">-</td>
+            <td *ngIf="akp.status == undefined" class="text-center">-</td>
+            <td *ngIf="akp.status=='valid'" class="glyphicon glyphicon-ok text-success"></td>
+            <td *ngIf="akp.status=='invalid'" class="glyphicon glyphicon-remove text-danger" style="color:red"></td>
+            <td *ngIf="akp.status=='warning'" class="glyphicon glyphicon-warning-sign  text-yellow"></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+<div class="col-md-6">
+  <div class="box box-info" style="overflow: auto; max-height: 43vh;">
     <div class="box-header">
-      <h3 class="box-title">Matches</h3>
+      <h3 class="box-title">Possible cardinality violation (subject-wise)</h3>
     </div>
 
     <app-match-selector *ngIf="akp !== undefined"
-      [cardinalityType]="'MaxSubjObjs'"
-      [akp]="akp"
-      (onMatchSelected)="getTriples($event)">
+                        [cardinalityType]="'MaxSubjsObj'"
+                        [akp]="akp"
+                        (onMatchSelected)="getTriples($event)">
     </app-match-selector>
 
   </div>
 </div>
 
-
-<div class="col-md-12">
-  <div class="box box-info">
+<div class="col-md-6">
+  <div class="box box-info" style="overflow: auto; max-height: 43vh;">
     <div class="box-header">
-      <h3 class="box-title">Matches</h3>
+      <h3 class="box-title">Possible cardinality violation (object-wise)</h3>
     </div>
 
     <app-match-selector *ngIf="akp !== undefined"
-                        [cardinalityType]="'MaxSubjsObj'"
+                        [cardinalityType]="'MaxSubjObjs'"
                         [akp]="akp"
                         (onMatchSelected)="getTriples($event)">
     </app-match-selector>
@@ -39,9 +90,9 @@
       <div class="box-body" style="overflow: auto;">
         <table class="table table-bordered table-hover table-striped">
           <tr>
-            <th>subject</th>
-            <th>predicate</th>
-            <th>object</th>
+            <th>Subject</th>
+            <th>Predicate</th>
+            <th>Object</th>
           </tr>
           <tr  *ngFor="let item of triples">
             <td> <a href="{{item.subj}}" target="_blank"> {{prefix(item.subj)}}</a></td>

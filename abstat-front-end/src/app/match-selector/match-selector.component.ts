@@ -50,6 +50,7 @@ export class MatchSelectorComponent implements OnInit {
     this.request.cardinalityType = this.cardinalityType;
     this.request.limit = 5;
     this.request.offset = 0;
+    this.request.sort = true;
 
     this.getMatches();
   }
@@ -99,7 +100,6 @@ export class MatchSelectorComponent implements OnInit {
     triplesRequest.predictedCardinality = null;
     triplesRequest.cardinalityType = this.request.cardinalityType;
     triplesRequest.limit = this.request.limit;
-    triplesRequest.offset = this.request.offset;
     this.onMatchSelected.emit(triplesRequest);
   }
 
@@ -122,6 +122,7 @@ export class ExtractorRequest {
   cardinalityType: string;
   limit: number;
   offset: number;
+  sort: boolean;
 
   constructor() {
   }

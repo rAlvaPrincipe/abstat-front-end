@@ -135,7 +135,8 @@ export class ApiService {
       '&predictedCardinality=' + request.predictedCardinality +
       '&cardinalityType=' + request.cardinalityType +
       '&limit=' + request.limit +
-      '&offset=' + request.offset;
+      '&offset=' + request.offset +
+      '&sort=' + request.sort;
 
     return this.http.get(url);
   }
