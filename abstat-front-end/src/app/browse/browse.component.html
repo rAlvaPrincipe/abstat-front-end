@@ -52,9 +52,12 @@
 
           <tr  *ngFor="let item of patterns">
             <td class = "text-center"><i class="fa fa-{{isInternal(item)}}" ></i></td>
-            <td> <a href="{{item.subject.globalURL}}" target="_blank">{{prefix(item.subject.globalURL)}}</a>  ({{item.subject.frequency}})</td>
-            <td> <a href="{{item.predicate.globalURL}}" target="_blank">{{prefix(item.predicate.globalURL)}}</a>  ({{item.predicate.frequency}})</td>
-            <td> <a href="{{item.object.globalURL}}" target="_blank">{{prefix(item.object.globalURL)}}</a> ({{item.object.frequency}})</td>
+            <td *ngIf="item.subject.frequency === undefined"> <a href="{{item.subject.globalURL}}" target="_blank">{{prefix(item.subject.globalURL)}}</a>  </td>
+            <td *ngIf="item.subject.frequency !== undefined"> <a href="{{item.subject.globalURL}}" target="_blank">{{prefix(item.subject.globalURL)}}</a>  ({{item.subject.frequency}})</td>
+            <td *ngIf="item.predicate.frequency === undefined"> <a href="{{item.predicate.globalURL}}" target="_blank">{{prefix(item.predicate.globalURL)}}</a> </td>
+            <td *ngIf="item.predicate.frequency !== undefined"> <a href="{{item.predicate.globalURL}}" target="_blank">{{prefix(item.predicate.globalURL)}}</a>  ({{item.predicate.frequency}})</td>
+            <td *ngIf="item.object.frequency === undefined"> <a href="{{item.object.globalURL}}" target="_blank">{{prefix(item.object.globalURL)}}</a> </td>
+            <td *ngIf="item.object.frequency !== undefined"> <a href="{{item.object.globalURL}}" target="_blank">{{prefix(item.object.globalURL)}}</a> ({{item.object.frequency}})</td>
             <td>{{item.frequency}}</td>
             <td *ngIf="item.numberOfInstances != undefined">{{item.numberOfInstances}}</td>
             <td *ngIf="item.numberOfInstances == undefined" class="text-center">-</td>

@@ -32,9 +32,10 @@
                 Concept Minimalization
               </label>
             </div>
-            <div class="checkbox" *ngIf="!_cluster">
+            <div class="checkbox">
               <label>
-                <input type="checkbox" name="inference" [(ngModel)]="request.inference">
+                <input  *ngIf="!_cluster" type="checkbox" name="inference" [(ngModel)]="request.inference">
+                <input  *ngIf="_cluster" type="checkbox" name="inference" disabled="disabled" [(ngModel)]="request.inference">
                 Inference
               </label>
             </div>
@@ -44,21 +45,17 @@
                 Cardinalities
               </label>
             </div>
-            <div class="checkbox" *ngIf="!_cluster">
+            <div class="checkbox">
               <label>
-                <input type="checkbox" name="property_min" [(ngModel)]="request.property_min">
+                <input  *ngIf="!_cluster" type="checkbox" name="property_min" [(ngModel)]="request.property_min">
+                <input  *ngIf="_cluster" type="checkbox" name="property_min" disabled="disabled" [(ngModel)]="request.property_min">
                 Property Minimalization
               </label>
             </div>
-            <div class="checkbox" *ngIf="!_cluster">
+            <div class="checkbox">
               <label>
-                <input type="checkbox" name="rich_cardinalities" [(ngModel)]="request.rich_cardinalities">
-                Rich Cardinalities
-              </label>
-            </div>
-            <div class="checkbox" *ngIf="!_cluster">
-              <label>
-                <input type="checkbox" name="shacl_validation" [(ngModel)]="request.shacl_validation">
+                <input *ngIf="!_cluster" type="checkbox" name="shacl_validation" [(ngModel)]="request.shacl_validation">
+                <input *ngIf="_cluster" type="checkbox" name="shacl_validation" disabled="disabled" [(ngModel)]="request.shacl_validation">
                 Shacl Validation
               </label>
             </div>

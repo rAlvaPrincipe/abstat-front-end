@@ -18,9 +18,12 @@
             <th>Severity</th>
           </tr>
           <tr>
-            <td> <a href="{{akp.subject.globalURL}}" target="_blank">{{prefix(akp.subject.globalURL)}}</a>  ({{akp.subject.frequency}})</td>
-            <td> <a href="{{akp.predicate.globalURL}}" target="_blank">{{prefix(akp.predicate.globalURL)}}</a>  ({{akp.predicate.frequency}})</td>
-            <td> <a href="{{akp.object.globalURL}}" target="_blank">{{prefix(akp.object.globalURL)}}</a> ({{akp.object.frequency}})</td>
+            <td *ngIf="akp.subject.frequency === undefined"> <a href="{{akp.subject.globalURL}}" target="_blank">{{prefix(akp.subject.globalURL)}}</a>  </td>
+            <td *ngIf="akp.subject.frequency !== undefined"> <a href="{{akp.subject.globalURL}}" target="_blank">{{prefix(akp.subject.globalURL)}}</a>  ({{akp.subject.frequency}})</td>
+            <td *ngIf="akp.predicate.frequency === undefined"> <a href="{{akp.predicate.globalURL}}" target="_blank">{{prefix(akp.predicate.globalURL)}}</a> </td>
+            <td *ngIf="akp.predicate.frequency !== undefined"> <a href="{{akp.predicate.globalURL}}" target="_blank">{{prefix(akp.predicate.globalURL)}}</a>  ({{akp.predicate.frequency}})</td>
+            <td *ngIf="akp.object.frequency === undefined"> <a href="{{akp.object.globalURL}}" target="_blank">{{prefix(akp.object.globalURL)}}</a> </td>
+            <td *ngIf="akp.object.frequency !== undefined"> <a href="{{akp.object.globalURL}}" target="_blank">{{prefix(akp.object.globalURL)}}</a> ({{akp.object.frequency}})</td>
             <td>{{akp.frequency}}</td>
             <td *ngIf="akp.numberOfInstances != undefined">{{akp.numberOfInstances}}</td>
             <td *ngIf="akp.numberOfInstances == undefined" class="text-center">-</td>
