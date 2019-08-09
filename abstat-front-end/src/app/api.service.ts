@@ -126,7 +126,7 @@ export class ApiService {
 
 
   extractMatches(request: ExtractorRequest): Observable<Object>{
-    const url = this.baseUrl + '/groupedExtractor?subj=' + encodeURIComponent(request.subj) +
+    const url = this.baseUrl + '/api/v1/groupedExtractor?subj=' + encodeURIComponent(request.subj) +
       '&pred=' + encodeURIComponent(request.pred) +
       '&obj=' + encodeURIComponent(request.obj) +
       '&dataset=' + request.dataset +
@@ -142,7 +142,7 @@ export class ApiService {
   }
 
   extractTriples(request: ExtractorRequest): Observable<Object>{
-    const url = this.baseUrl + '/singleExtractor?subj=' + encodeURIComponent(request.subj) +
+    const url = this.baseUrl + '/api/v1/singleExtractor?subj=' + encodeURIComponent(request.subj) +
       '&pred=' + encodeURIComponent(request.pred) +
       '&obj=' + encodeURIComponent(request.obj) +
       '&dataset=' + request.dataset +
@@ -168,7 +168,7 @@ export class ApiService {
         'Authorization': 'my-auth-token'
       })
     };
-    return this.http.post(url + '/consolidate', data, httpOptions);
+    return this.http.post(url + '/api/v1/consolidate', data, httpOptions);
   }
 
 
@@ -181,9 +181,9 @@ export class ApiService {
 
     let url = this.getUrl(cluster);
     if (mode === 'dataset') {
-      url += '/upload/ds';
+      url += '/api/v1/upload/ds';
     } else {
-      url += '/upload/ont';
+      url += '/api/v1/upload/ont';
     }
     return this.http.post(url, formData, httpOptions);
   }
@@ -196,7 +196,7 @@ export class ApiService {
         'Authorization': 'my-auth-token'
       })
     };
-    return this.http.post(url + '/' + type + '/' + command + '/' + id, {}, httpOptions);
+    return this.http.post(url + '/api/v1/' + type + '/' + command + '/' + id, {}, httpOptions);
   }
 
   summarize(cluster: boolean, request: SummarizationRequest): Observable<Object> {
@@ -213,7 +213,7 @@ export class ApiService {
         'Authorization': 'my-auth-token'
       })
     };
-    return this.http.post(url + '/summarizator', data, httpOptions);
+    return this.http.post(url + '/api/v1/summarizator', data, httpOptions);
   }
 
 
