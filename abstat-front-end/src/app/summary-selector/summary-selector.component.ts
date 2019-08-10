@@ -29,7 +29,7 @@ export class SummarySelectorComponent implements OnInit {
     if (profile === 'home') {
       this._profile = new Profile(false, true, true, true, true, true, true, true, true, true, true, true, true);
     } else if (profile === 'browse') {
-      this._profile = new Profile(true, false, true, true, true, false, true, true, true, true, true, true, false);
+      this._profile = new Profile(true, false, true, true, true, false, true, true, true, true, true, false, false);
     } else if ( profile === 'consolidate') {
       this._profile = new Profile(true, false, true, true, true, true, true, true, true, true, true, true, true);
     } else if ( profile === 'manage') {

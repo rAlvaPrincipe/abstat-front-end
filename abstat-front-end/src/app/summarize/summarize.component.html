@@ -29,7 +29,14 @@
             <div class="checkbox">
               <label>
                 <input type="checkbox" name="concept_min" [(ngModel)]="request.concept_min">
-                Concept Minimalization
+                Concept minimalization
+              </label>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input  *ngIf="!_cluster" type="checkbox" name="property_min" [(ngModel)]="request.property_min">
+                <input  *ngIf="_cluster" type="checkbox" name="property_min" disabled="disabled" [(ngModel)]="request.property_min">
+                Property minimalization
               </label>
             </div>
             <div class="checkbox">
@@ -42,21 +49,14 @@
             <div class="checkbox">
               <label>
                 <input type="checkbox" name="cardinality" [(ngModel)]="request.cardinality">
-                Cardinalities
-              </label>
-            </div>
-            <div class="checkbox">
-              <label>
-                <input  *ngIf="!_cluster" type="checkbox" name="property_min" [(ngModel)]="request.property_min">
-                <input  *ngIf="_cluster" type="checkbox" name="property_min" disabled="disabled" [(ngModel)]="request.property_min">
-                Property Minimalization
+                Cardinality descriptors
               </label>
             </div>
             <div class="checkbox">
               <label>
                 <input *ngIf="!_cluster" type="checkbox" name="shacl_validation" [(ngModel)]="request.shacl_validation">
                 <input *ngIf="_cluster" type="checkbox" name="shacl_validation" disabled="disabled" [(ngModel)]="request.shacl_validation">
-                Shacl Validation
+                Cardinality validation (SHACL)
               </label>
             </div>
           </div>
