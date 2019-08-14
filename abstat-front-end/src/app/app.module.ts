@@ -2,9 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import {APP_INITIALIZER, NgModule} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { RouterModule, Routes } from '@angular/router';
-
-
 import { AppComponent } from './app.component';
 import { SummarySelectorComponent } from './summary-selector/summary-selector.component';
 import { BrowseComponent } from './browse/browse.component';
@@ -25,18 +22,7 @@ import { BackendSelectorComponent } from './backend-selector/backend-selector.co
 import { Ng2CompleterModule } from 'ng2-completer';
 import { TriplesExtractorComponent } from './triples-extractor/triples-extractor.component';
 import { MatchSelectorComponent } from './match-selector/match-selector.component';
-
-const appRoutes: Routes = [
-  { path: '', component: HomeComponent},
-  { path: 'home', component: HomeComponent},
-  { path: 'summarize', component: BackendSelectorComponent},
-  { path: 'consolidate', component: ConsolidateComponent},
-  { path: 'browse', component: BrowseComponent },
-  { path: 'search', component: SearchComponent },
-  { path: 'manage', component: ManageComponent},
-  { path: 'apis', component: ApisComponent},
-  { path: 'extractor', component: TriplesExtractorComponent}
-];
+import {AppRoutingModule} from "./app-routing.module";
 
 export function initConfig(config: ConfigService) {
   return () => config.getHost();
@@ -68,10 +54,7 @@ export function initConfig(config: ConfigService) {
     HttpClientModule,
     FormsModule,
     Ng2CompleterModule,
-    RouterModule.forRoot(
-      appRoutes,
-      { enableTracing: false }
-    )
+    AppRoutingModule
   ],
   providers: [
     ConfigService,
