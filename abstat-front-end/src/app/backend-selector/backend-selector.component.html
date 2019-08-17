@@ -15,9 +15,11 @@
     </div>
   </div>
 
-  <app-summarize  (onSubmit)="setRequest($event)"
-    [cluster]="cluster">
-  </app-summarize>
+  <div class="col-md-6">
+    <app-summarize  (onSubmit)="setRequest($event)"
+                    [cluster]="cluster">
+    </app-summarize>
+  </div>
 
   <div class="col-md-6" >
     <app-datasetontology-uploader

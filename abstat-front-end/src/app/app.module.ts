@@ -30,6 +30,9 @@ import {UserService} from "./user.service";
 import {AdminAuthGuard} from "./guards/admin-auth-guard.service";
 import {ApiService} from "./api.service";
 import {AuthGuard} from "./guards/auth-guard.service";
+import { TemplateFooterComponent } from './template-footer/template-footer.component';
+import { TemplateMenuComponent } from './template-menu/template-menu.component';
+import { TemplateHeaderComponent } from './template-header/template-header.component';
 
 export function authHttpServiceFactory(http: Http) {
   return new AuthHttp(new AuthConfig({
@@ -61,7 +64,10 @@ export function authHttpServiceFactory(http: Http) {
     BackendSelectorComponent,
     TriplesExtractorComponent,
     MatchSelectorComponent,
-    LoginComponent
+    LoginComponent,
+    TemplateFooterComponent,
+    TemplateMenuComponent,
+    TemplateHeaderComponent
   ],
   imports: [
     BrowserModule,

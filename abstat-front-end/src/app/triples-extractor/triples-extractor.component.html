@@ -1,4 +1,5 @@
 
+<div class="row">
   <div class="col-md-12">
     <div class="box box-{{status()}}">
       <div class="box-body" style="overflow: auto;">
@@ -48,68 +49,72 @@
       </div>
     </div>
   </div>
-
-
-
-
-
-
-<div class="col-md-6">
-  <div class="box box-info" style="overflow: auto; max-height: 43vh;">
-    <div class="box-header">
-      <h3 class="box-title">Possible cardinality violation (subject-wise)</h3>
-    </div>
-
-    <app-match-selector *ngIf="akp !== undefined"
-                        [cardinalityType]="'MaxSubjsObj'"
-                        [akp]="akp"
-                        (onMatchSelected)="getTriples($event)">
-    </app-match-selector>
-
-  </div>
 </div>
 
-<div class="col-md-6">
-  <div class="box box-info" style="overflow: auto; max-height: 43vh;">
-    <div class="box-header">
-      <h3 class="box-title">Possible cardinality violation (object-wise)</h3>
-    </div>
 
-    <app-match-selector *ngIf="akp !== undefined"
-                        [cardinalityType]="'MaxSubjObjs'"
-                        [akp]="akp"
-                        (onMatchSelected)="getTriples($event)">
-    </app-match-selector>
 
-  </div>
-</div>
 
-<div *ngIf="show">
-  <div class="col-md-12">
-    <div class="box box-info">
+<div class="row">
+  <div class="col-md-6">
+    <div class="box box-info" style="overflow: auto; max-height: 43vh;">
       <div class="box-header">
-        <h3 class="box-title">Triples</h3>
+        <h3 class="box-title">Possible cardinality violation (subject-wise)</h3>
       </div>
-      <div class="box-body" style="overflow: auto;">
-        <table class="table table-bordered table-hover table-striped">
-          <tr>
-            <th>Subject</th>
-            <th>Predicate</th>
-            <th>Object</th>
-          </tr>
-          <tr  *ngFor="let item of triples">
-            <td> <a href="{{item.subj}}" target="_blank"> {{prefix(item.subj)}}</a></td>
-            <td> <a href="{{item.pred}}" target="_blank"> {{prefix(item.pred)}}</a></td>
-            <td *ngIf="akp.type =='Datatype AKP'">{{item.obj}}</td>
-            <td *ngIf="this.akp.type === 'Object AKP'"><a href="{{item.obj}}" target="_blank"> {{prefix(item.obj)}}</a></td>
 
-          </tr>
-        </table>
-        <div *ngIf="!loadingTriples">
-          <button (click)="loadMore()" type="button" class="btn btn-deafult btn-block"> <strong>{{triples.length}}</strong> triples found - get more  </button>
+      <app-match-selector *ngIf="akp !== undefined"
+                          [cardinalityType]="'MaxSubjsObj'"
+                          [akp]="akp"
+                          (onMatchSelected)="getTriples($event)">
+      </app-match-selector>
+
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="box box-info" style="overflow: auto; max-height: 43vh;">
+      <div class="box-header">
+        <h3 class="box-title">Possible cardinality violation (object-wise)</h3>
+      </div>
+
+      <app-match-selector *ngIf="akp !== undefined"
+                          [cardinalityType]="'MaxSubjObjs'"
+                          [akp]="akp"
+                          (onMatchSelected)="getTriples($event)">
+      </app-match-selector>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div *ngIf="show">
+    <div class="col-md-12">
+      <div class="box box-info">
+        <div class="box-header">
+          <h3 class="box-title">Triples</h3>
         </div>
-        <div *ngIf="loadingTriples">
-          <button (click)="loadMore()" type="button" class="btn btn-deafult btn-block"> <strong>{{triples.length}}</strong> triples found - get more <i class="fa fa-spinner fa-spin"></i>  </button>
+        <div class="box-body" style="overflow: auto;">
+          <table class="table table-bordered table-hover table-striped">
+            <tr>
+              <th>Subject</th>
+              <th>Predicate</th>
+              <th>Object</th>
+            </tr>
+            <tr  *ngFor="let item of triples">
+              <td> <a href="{{item.subj}}" target="_blank"> {{prefix(item.subj)}}</a></td>
+              <td> <a href="{{item.pred}}" target="_blank"> {{prefix(item.pred)}}</a></td>
+              <td *ngIf="akp.type =='Datatype AKP'">{{item.obj}}</td>
+              <td *ngIf="this.akp.type === 'Object AKP'"><a href="{{item.obj}}" target="_blank"> {{prefix(item.obj)}}</a></td>
+
+            </tr>
+          </table>
+          <div *ngIf="!loadingTriples">
+            <button (click)="loadMore()" type="button" class="btn btn-deafult btn-block"> <strong>{{triples.length}}</strong> triples found - get more  </button>
+          </div>
+          <div *ngIf="loadingTriples">
+            <button (click)="loadMore()" type="button" class="btn btn-deafult btn-block"> <strong>{{triples.length}}</strong> triples found - get more <i class="fa fa-spinner fa-spin"></i>  </button>
+          </div>
         </div>
       </div>
     </div>

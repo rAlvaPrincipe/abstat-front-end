@@ -2,31 +2,33 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 
-<div class="col-md-12">
-  <form #searchForm="ngForm" (ngSubmit)="submitted(searchForm)">
-  <div class="box box-info">
+<div class="row">
+  <div class="col-md-12">
+    <form #searchForm="ngForm" (ngSubmit)="submitted(searchForm)">
+      <div class="box box-info">
 
-    <div class="box-body ">
-      <div class="form-group">
-        <label>Choose a dataset for filtering</label>
-        <select class="form-control" name="dataset" [(ngModel)]="request.dataset" >
-          <option> all </option>
-          <option  *ngFor='let dataset of datasets'> {{dataset}} </option>
-        </select>
-      </div>
-      <input type="text" name="query" class="form-control" [(ngModel)]="request.query" required placeHolder="Search for concepts, properties and abstract knowledge patterns"/>
-    </div>
+        <div class="box-body ">
+          <div class="form-group">
+            <label>Choose a dataset for filtering</label>
+            <select class="form-control" name="dataset" [(ngModel)]="request.dataset" >
+              <option> all </option>
+              <option  *ngFor='let dataset of datasets'> {{dataset}} </option>
+            </select>
+          </div>
+          <input type="text" name="query" class="form-control" [(ngModel)]="request.query" required placeHolder="Search for concepts, properties and abstract knowledge patterns"/>
+        </div>
 
-    <div class="box-body">
-      <div class="checkbox" style="margin-top:-0.2cm">
-        <label>
-          <input type="checkbox" name="includeNPref" [(ngModel)]="request.includeNPref">Include non-preferred resources
-        </label>
+        <div class="box-body">
+          <div class="checkbox" style="margin-top:-0.2cm">
+            <label>
+              <input type="checkbox" name="includeNPref" [(ngModel)]="request.includeNPref">Include non-preferred resources
+            </label>
+          </div>
+          <div >
+            <button type="submit" class="btn btn-primary" [disabled]="!searchForm.form.valid" >Search  <i *ngIf="searching" class="fa fa-spinner fa-spin"></i></button>
+          </div>
+        </div>
       </div>
-      <div >
-        <button type="submit" class="btn btn-primary" [disabled]="!searchForm.form.valid" >Search  <i *ngIf="searching" class="fa fa-spinner fa-spin"></i></button>
-      </div>
-    </div>
+    </form>
   </div>
-  </form>
 </div>

@@ -1,22 +1,22 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="box box-info">
+      <div class="box-header">
+        <h3 class="box-title">Stored summaries</h3>
+      </div>
 
-<div class="col-md-12">
-  <div class="box box-info">
-    <div class="box-header">
-      <h3 class="box-title">Stored summaries</h3>
+      <app-summary-selector
+        [getEverySummary]="false"
+        [profile]="'browse'"
+        (onSummarySelected)="getSummary($event)">
+      </app-summary-selector>
+
     </div>
-
-    <app-summary-selector
-      [getEverySummary]="false"
-      [profile]="'browse'"
-      (onSummarySelected)="getSummary($event)">
-    </app-summary-selector>
-
   </div>
 </div>
 
-
-<div *ngIf="show">
-  <div class="col-md-12">
+<div class="row">
+  <div *ngIf="show" class="col-md-12">
     <div class="box box-info">
       <div class="box-body" style="overflow: auto;">
         <table class="table table-bordered table-hover table-striped">

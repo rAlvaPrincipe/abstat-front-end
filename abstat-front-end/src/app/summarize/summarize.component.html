@@ -2,68 +2,67 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 
-<div class="col-md-6">
-    <form #summarizeForm="ngForm" (ngSubmit)="onFormSubmit()">
-      <div [ngClass]="_cluster  ? 'box box-warning' : 'box box-info'">
-        <div class="box-header with-border">
-          <h3 class="box-title">Summarize</h3>
-        </div>
-        <div class="box-body">
-          <label>Choose a data set:</label>
-          <div class="form-group">
-            <select class="form-control" name="dataset" required [(ngModel)]="request.dataset">
-              <option [ngValue]="undefined" disabled selected> Please select one</option>
-              <option *ngFor="let dataset of datasets" [ngValue]="dataset"> {{dataset.name}}</option>
-            </select>
-          </div>
-          <label>Choose an ontology</label>
-          <div class="form-group">
-            <select class="form-control" name="ontology" [(ngModel)]="request.ontology">
-              <option [ngValue]="undefined" selected> no ontology</option>
-              <option *ngFor="let ontology of ontologies" [ngValue]="ontology"> {{ontology.name}} </option>
-            </select>
-          </div>
 
-          <label>Options:</label>
-          <div class="form-group">
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" name="concept_min" [(ngModel)]="request.concept_min">
-                Concept minimalization
-              </label>
-            </div>
-            <div class="checkbox">
-              <label>
-                <input  *ngIf="!_cluster" type="checkbox" name="property_min" [(ngModel)]="request.property_min">
-                <input  *ngIf="_cluster" type="checkbox" name="property_min" disabled="disabled" [(ngModel)]="request.property_min">
-                Property minimalization
-              </label>
-            </div>
-            <div class="checkbox">
-              <label>
-                <input  *ngIf="!_cluster" type="checkbox" name="inference" [(ngModel)]="request.inference">
-                <input  *ngIf="_cluster" type="checkbox" name="inference" disabled="disabled" [(ngModel)]="request.inference">
-                Inference
-              </label>
-            </div>
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" name="cardinality" [(ngModel)]="request.cardinality">
-                Cardinality descriptors
-              </label>
-            </div>
-            <div class="checkbox">
-              <label>
-                <input *ngIf="!_cluster" type="checkbox" name="shacl_validation" [(ngModel)]="request.shacl_validation">
-                <input *ngIf="_cluster" type="checkbox" name="shacl_validation" disabled="disabled" [(ngModel)]="request.shacl_validation">
-                Cardinality validation (SHACL)
-              </label>
-            </div>
-          </div>
+<form #summarizeForm="ngForm" (ngSubmit)="onFormSubmit()">
+  <div [ngClass]="_cluster  ? 'box box-warning' : 'box box-info'">
+    <div class="box-header with-border">
+      <h3 class="box-title">Summarize</h3>
+    </div>
+    <div class="box-body">
+      <label>Choose a data set:</label>
+      <div class="form-group">
+        <select class="form-control" name="dataset" required [(ngModel)]="request.dataset">
+          <option [ngValue]="undefined" disabled selected> Please select one</option>
+          <option *ngFor="let dataset of datasets" [ngValue]="dataset"> {{dataset.name}}</option>
+        </select>
+      </div>
+      <label>Choose an ontology</label>
+      <div class="form-group">
+        <select class="form-control" name="ontology" [(ngModel)]="request.ontology">
+          <option [ngValue]="undefined" selected> no ontology</option>
+          <option *ngFor="let ontology of ontologies" [ngValue]="ontology"> {{ontology.name}} </option>
+        </select>
+      </div>
+
+      <label>Options:</label>
+      <div class="form-group">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="concept_min" [(ngModel)]="request.concept_min">
+            Concept minimalization
+          </label>
         </div>
-        <div class="box-footer">
-          <button type="submit" class="btn btn-primary" [disabled]="!summarizeForm.form.valid|| (request.shacl_validation && !request.cardinality)">Submit</button>
+        <div class="checkbox">
+          <label>
+            <input  *ngIf="!_cluster" type="checkbox" name="property_min" [(ngModel)]="request.property_min">
+            <input  *ngIf="_cluster" type="checkbox" name="property_min" disabled="disabled" [(ngModel)]="request.property_min">
+            Property minimalization
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input  *ngIf="!_cluster" type="checkbox" name="inference" [(ngModel)]="request.inference">
+            <input  *ngIf="_cluster" type="checkbox" name="inference" disabled="disabled" [(ngModel)]="request.inference">
+            Inference
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="cardinality" [(ngModel)]="request.cardinality">
+            Cardinality descriptors
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input *ngIf="!_cluster" type="checkbox" name="shacl_validation" [(ngModel)]="request.shacl_validation">
+            <input *ngIf="_cluster" type="checkbox" name="shacl_validation" disabled="disabled" [(ngModel)]="request.shacl_validation">
+            Cardinality validation (SHACL)
+          </label>
         </div>
       </div>
-    </form>
+    </div>
+    <div class="box-footer">
+      <button type="submit" class="btn btn-primary" [disabled]="!summarizeForm.form.valid|| (request.shacl_validation && !request.cardinality)">Submit</button>
+    </div>
   </div>
+</form>
