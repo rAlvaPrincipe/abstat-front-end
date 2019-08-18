@@ -12,5 +12,16 @@
     <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
       <span class="sr-only">Toggle navigation</span>
     </a>
+    <!-- Navbar Right Menu -->
+    <div class="navbar-custom-menu" *ngIf="check()">
+      <ul class="nav navbar-nav">
+        <button class="btn navbar-btn btn-primary" (click)="logout()">
+          <i class="glyphicon glyphicon-log-out"></i>
+        </button>
+
+      </ul>
+    </div>
   </nav>
 </header>
+
+

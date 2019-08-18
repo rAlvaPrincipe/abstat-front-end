@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {JwtHelper} from 'angular2-jwt';
 import {TOKEN_NAME} from "./auth.constant";
+import {Router} from "@angular/router";
 
 @Injectable()
 export class UserService {
@@ -8,7 +9,7 @@ export class UserService {
   accessToken: string;
   isAdmin: boolean;
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   login(accessToken: string) {
@@ -25,6 +26,7 @@ export class UserService {
     this.accessToken = null;
     this.isAdmin = false;
     localStorage.removeItem(TOKEN_NAME);
+    this.router.navigate(['/']);
   }
 
   isAdminUser(): boolean {
