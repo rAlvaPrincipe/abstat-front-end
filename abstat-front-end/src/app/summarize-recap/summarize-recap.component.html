@@ -32,10 +32,17 @@
           <td *ngIf="!request.cluster"> single-machine </td>
         </tr>
         <tr>
-          <td>Concept Minimalization</td>
+          <td>Concept minimalization</td>
           <td>
             <span *ngIf="request.concept_min" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
             <span *ngIf="!request.concept_min" class="glyphicon glyphicon-remove text-danger" style="color:red"></span>
+          </td>
+        </tr>
+        <tr *ngIf="!request.cluster">
+          <td>Property minimalization</td>
+          <td>
+            <span *ngIf="request.property_min" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
+            <span *ngIf="!request.property_min" class="glyphicon glyphicon-remove text-danger" style="color:red"></span>
           </td>
         </tr>
         <tr *ngIf="!request.cluster">
@@ -46,28 +53,14 @@
           </td>
         </tr>
         <tr >
-          <td>Cardinalities</td>
+          <td>Cardinality descriptors </td>
           <td>
             <span *ngIf="request.cardinality" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
             <span *ngIf="!request.cardinality" class="glyphicon glyphicon-remove text-danger" style="color:red"></span>
           </td>
         </tr>
         <tr *ngIf="!request.cluster">
-          <td>Property Minimalization</td>
-          <td>
-            <span *ngIf="request.property_min" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
-            <span *ngIf="!request.property_min" class="glyphicon glyphicon-remove text-danger" style="color:red"></span>
-          </td>
-        </tr>
-        <tr *ngIf="!request.cluster">
-          <td>Rich Cardinalities</td>
-          <td>
-            <span *ngIf="request.rich_cardinalities" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
-            <span *ngIf="!request.rich_cardinalities" class="glyphicon glyphicon-remove text-danger" style="color:red"></span>
-          </td>
-        </tr>
-        <tr *ngIf="!request.cluster">
-          <td>Shacl Validation</td>
+          <td>Cardinality validation (SHACL)</td>
           <td>
             <span *ngIf="request.shacl_validation" class="glyphicon glyphicon-ok text-success" style="color:green"></span>
             <span *ngIf="!request.shacl_validation" class="glyphicon glyphicon-remove text-danger" style="color:red"></span>

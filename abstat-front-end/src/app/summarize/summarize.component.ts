@@ -57,7 +57,6 @@ export class SummarizeComponent implements OnInit {
     this.request.inference = false;
     this.request.cardinality = false;
     this.request.property_min = false;
-    this.request.rich_cardinalities = false;
     this.request.shacl_validation = false;
   }
 
@@ -72,7 +71,6 @@ export class SummarizationRequest {
   inference: boolean;
   cardinality: boolean;
   property_min: boolean;
-  rich_cardinalities: boolean;
   shacl_validation: boolean;
   email: string;
 
@@ -82,7 +80,6 @@ export class SummarizationRequest {
     this.inference = false;
     this.cardinality = false;
     this.property_min = false;
-    this.rich_cardinalities = false;
     this.shacl_validation = false;
   }
 }

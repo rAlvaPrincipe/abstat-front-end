@@ -27,13 +27,13 @@ export class SummarySelectorComponent implements OnInit {
   @Input()
   set profile(profile: string) {
     if (profile === 'home') {
-      this._profile = new Profile(false, true, true, true, true, true, true, true, true, true, true, true, true);
+      this._profile = new Profile(false, true, true, true, true, true, true,true, true, true, true, true, true, true, true);
     } else if (profile === 'browse') {
-      this._profile = new Profile(true, false, true, true, true, false, true, true, true, true, true, false, false);
+      this._profile = new Profile(true, false, true, true, true, true, true, false, true, true, true, true, true, false, false);
     } else if ( profile === 'consolidate') {
-      this._profile = new Profile(true, false, true, true, true, true, true, true, true, true, true, true, true);
+      this._profile = new Profile(true, false, true, true, true, true, true, true, true, true, true, true, true, true, true);
     } else if ( profile === 'manage') {
-      this._profile = new Profile(true, false, true, true, true, true, true, true, true, true, true, true, true);
+      this._profile = new Profile(true, false, true, true, true, true, true, true, true, true, true, true, true, true, true);
     }
   }
 
@@ -50,6 +50,8 @@ export class Profile {
   public dataset: boolean;
   public ontology: boolean;
   public timestamp: boolean;
+  public numberOfTriples: boolean;
+  public numberOfPatterns: boolean;
   public server: boolean;
   public tipoMinimo: boolean;
   public inference: boolean;
@@ -59,12 +61,14 @@ export class Profile {
   public loadedMongoDB: boolean;
   public indexedSolr: boolean;
 
-  constructor(selector: boolean, id: boolean, dataset: boolean, ontology: boolean, timestamp: boolean, server: boolean, tipoMinimo: boolean, inference: boolean, cardinality: boolean, propertyMinimaliz: boolean, shaclValidation: boolean, loadedMongoDB: boolean, indexedSolr) {
+  constructor(selector: boolean, id: boolean, dataset: boolean, ontology: boolean, timestamp: boolean, numberOfTriples: boolean, numberOfPatterns: boolean, server: boolean, tipoMinimo: boolean, inference: boolean, cardinality: boolean, propertyMinimaliz: boolean, shaclValidation: boolean, loadedMongoDB: boolean, indexedSolr) {
     this.selector = selector;
     this.id = id;
     this.dataset = dataset;
     this.ontology = ontology;
     this.timestamp = timestamp;
+    this.numberOfTriples = numberOfTriples;
+    this.numberOfPatterns = numberOfPatterns;
     this.server = server;
     this.tipoMinimo = tipoMinimo;
     this.inference = inference;

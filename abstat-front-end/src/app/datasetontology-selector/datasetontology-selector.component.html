@@ -8,6 +8,7 @@
     <tr>
       <th *ngIf="allowSelection">Select</th>
       <th>Name</th>
+      <th *ngIf="type==='dataset'"># Triples</th>
       <th>Timestamp</th>
       <th>Server</th>
     </tr>
@@ -18,6 +19,7 @@
         <input type="radio" name="radiogroup" (click)="checked(item)">
       </td>
       <td>{{item.name}}</td>
+      <td *ngIf="type==='dataset'">{{item.numberOfTriples}}</td>
       <td>{{item.timestamp}}</td>
       <td>{{item.server}}</td>
     </tr>

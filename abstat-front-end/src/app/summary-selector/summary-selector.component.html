@@ -10,6 +10,8 @@
       <th *ngIf="_profile.id">ID</th>
       <th *ngIf="_profile.dataset">Dataset</th>
       <th *ngIf="_profile.ontology">Ontology</th>
+      <th *ngIf="_profile.numberOfTriples"># Triples</th>
+      <th *ngIf="_profile.numberOfPatterns"># Patterns</th>
       <th *ngIf="_profile.timestamp">Timestamp</th>
       <th *ngIf="_profile.server">Mode</th>
       <th *ngIf="_profile.tipoMinimo" class = "text-center">Concept min.</th>
@@ -29,6 +31,8 @@
       <td *ngIf="_profile.id">{{summary.id}}</td>
       <td *ngIf="_profile.dataset">{{summary.dsName}}</td>
       <td *ngIf="_profile.ontology">{{summary.listOntNames[0]}}</td>
+      <td *ngIf="_profile.numberOfTriples">{{summary.numberOfTriples}}</td>
+      <td *ngIf="_profile.numberOfPatterns">{{summary.numberOfPatterns}}</td>
       <td *ngIf="_profile.timestamp">{{summary.timestamp}}</td>
       <td *ngIf="_profile.server">{{summary.server}}</td>
       <td  *ngIf="_profile.tipoMinimo" class = "text-center">

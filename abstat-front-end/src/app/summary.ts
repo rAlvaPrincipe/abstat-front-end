@@ -11,6 +11,8 @@ export class Summary {
     private _cardinalita: boolean,
     private _propertyMinimaliz: boolean,
     private _shaclValidation: boolean,
+    private _numberOfTriples: number,
+    private _numberOfPatterns: number,
     private _loadedMongoDB: boolean,
     private _indexedSolr: boolean) {
   }
@@ -44,6 +46,12 @@ export class Summary {
 
   get shaclValidation(): boolean { return this._shaclValidation; }
   set shaclValidation(value: boolean) { this._shaclValidation = value; }
+
+  get numberOfTriples(): number { return this._numberOfTriples; }
+  set numberOfTriples(value: number) { this._numberOfTriples = value; }
+
+  get numberOfPatterns(): number { return this._numberOfPatterns; }
+  set numberOfPatterns(value: number) { this._numberOfPatterns = value; }
 
   get loadedMongoDB(): boolean { return this._loadedMongoDB; }
   set loadedMongoDB(value: boolean) { this._loadedMongoDB = value; }
