@@ -5,8 +5,10 @@
 <ng2-completer  class="completer-limit"
   [(ngModel)]="constraint"
   [datasource]="dataService"
-  [minSearchLength]="2"
+  [minSearchLength]="2" [pause]="350"
   [placeholder]="type"
   [fillHighlighted]=false
   [matchClass]="'match'">
 </ng2-completer>
+
+<!-- <input type="text" name="query" class="form-control" [(ngModel)]="q.query"  (ngModelChange)="funzione($event)"  required placeHolder="Search for concepts, properties and abstract knowledge patterns"/> -->

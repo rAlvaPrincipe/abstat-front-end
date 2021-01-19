@@ -3,6 +3,8 @@ import { Summary} from '../summary';
 import {PrefixService} from '../prefix.service';
 import {ApiService} from '../api.service';
 import { CompleterService, CompleterData } from 'ng2-completer';
+import {HttpHeaders} from "@angular/common/http";
+import {TOKEN_NAME} from "../auth.constant";
 
 @Component({
   selector: 'app-browse-autocomplete',
@@ -14,7 +16,7 @@ export class BrowseAutocompleteComponent implements OnChanges  {
 
   @Input() type: string;
   @Input() summary: Summary;
-  protected dataService: CompleterData;
+  dataService: CompleterData;
   query = '';
   results: string[] = [];
   constraint = '';
@@ -24,11 +26,15 @@ export class BrowseAutocompleteComponent implements OnChanges  {
 
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['summary']) {
-      this.obtainSuggestions();
-      this.dataService = this.completerService.local(this.results);
-    }
+     if (changes['summary']) {
+       let q_url = "http://localhost/api/v2/SPO?summary=" + this.summary.id + "&qPosition=" + this.type + "&qString="
+       const httpOptions = {headers: new HttpHeaders().append('Authorization',  'Bearer ' + localStorage.getItem(TOKEN_NAME))};
+       let dataRemote =  this.completerService.remote(q_url, "prefixed", "prefixed");
+       dataRemote. requestOptions(httpOptions);
+       this.dataService = dataRemote
+     }
   }
+
 
   obtainSuggestions(): void {
     this.results = [];

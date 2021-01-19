@@ -31,7 +31,8 @@
       <td *ngIf="_profile.id">{{summary.id}}</td>
       <td *ngIf="_profile.dataset">{{summary.dsName}}</td>
       <td *ngIf="_profile.ontology">{{summary.listOntNames[0]}}</td>
-      <td *ngIf="_profile.numberOfTriples">{{summary.numberOfTriples}}</td>
+      <td *ngIf="_profile.numberOfTriples && summary.numberOfTriples === 0">-</td>
+      <td *ngIf="_profile.numberOfTriples && summary.numberOfTriples !== 0">{{summary.numberOfTriples}}</td>
       <td *ngIf="_profile.numberOfPatterns">{{summary.numberOfPatterns}}</td>
       <td *ngIf="_profile.timestamp">{{summary.timestamp}}</td>
       <td *ngIf="_profile.server">{{summary.server}}</td>
