@@ -2,8 +2,11 @@
 // `ng build ---prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+
+// this is the default environment "$ng build". It loads full features and authentication
 export const environment = {
-  production: false
+  production: false,  //this is just a variable, it has no effect if not used
+  mode: 'full-closed'
 };
 
 /*

@@ -10,6 +10,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ExtractorRequest} from './match-selector/match-selector.component';
 import {BACKEND, TOKEN_NAME} from "./auth.constant";
 import {CLUSTER_BACKEND} from "./auth.constant";
+import {environment} from "../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -19,12 +20,14 @@ export class ApiService {
   clusterBaseUrl: string;
   GETheaders: HttpHeaders;
   POSTheaders: HttpHeaders;
+  with_header: boolean;
 
   constructor(private http: HttpClient) {
     this.baseUrl = BACKEND;
     this.clusterBaseUrl = CLUSTER_BACKEND;
     this.GETheaders = new HttpHeaders({'Authorization':  'Bearer ' + localStorage.getItem(TOKEN_NAME)});
     this.POSTheaders =  new HttpHeaders({'Authorization':  'Bearer ' + localStorage.getItem(TOKEN_NAME), 'Content-Type': 'application/x-www-form-urlencoded'});
+    this.with_header = environment.mode == 'full-closed';
   }
 
   /********************************************* GET Requests *******************************************************/
@@ -32,7 +35,7 @@ export class ApiService {
   getDatasets(singleM: boolean, cluster: boolean): Dataset[] {
     const datasets: Dataset[] = [];
     let data: JSON[];
-    this.http.get(this.baseUrl + '/api/v1/datasets', {headers: this.GETheaders})
+    this.http.get(this.baseUrl + '/api/v1/datasets', this.with_header ? {headers: this.GETheaders} : {})
       .subscribe((response) => {
         data = response['datasets'];
         data.map((el: any) => {
@@ -51,7 +54,7 @@ export class ApiService {
   getOntologies(singleM: boolean, cluster: boolean): Ontology[] {
     const ontologies: Ontology[] = [];
     let data: JSON[];
-    this.http.get(this.baseUrl + '/api/v1/ontologies', {headers: this.GETheaders})
+    this.http.get(this.baseUrl + '/api/v1/ontologies', this.with_header ? {headers: this.GETheaders} : {})
       .subscribe((response) => {
         data = response['ontologies'];
         data.map((el: any) => {
@@ -79,7 +82,7 @@ export class ApiService {
 
     const summaries: Summary[] = [];
     let data: JSON[];
-    this.http.get(url, {headers: this.GETheaders})
+    this.http.get(url, this.with_header ? {headers: this.GETheaders} : {})
       .subscribe((response) => {
           data = response['summaries'];
           data.map((el: any) => {
@@ -94,7 +97,7 @@ export class ApiService {
   getDatasetsWhichSummariesAreIndexed(): Set<string> {
     const datasets: Set<string> = new Set<string>();
     let data: JSON[];
-    this.http.get(this.baseUrl + '/api/v1/summaries?indexed=true', {headers: this.GETheaders})
+    this.http.get(this.baseUrl + '/api/v1/summaries?indexed=true', this.with_header ? {headers: this.GETheaders} : {})
       .subscribe((response) => {
         data = response['summaries'];
         data.map((el: any) => {
@@ -109,7 +112,7 @@ export class ApiService {
   browse(summary: string, subjConstraint, predConstraint, objConstraint, limit, offset): Observable<Object> {
     return this.http.get(this.baseUrl + '/api/v1/browse?enrichWithSPO=true&summary=' + summary +
       '&subj=' + encodeURIComponent(subjConstraint) + '&pred=' + encodeURIComponent(predConstraint) +
-      '&obj=' + encodeURIComponent(objConstraint) + '&limit=' + limit + '&offset=' + offset, {headers: this.GETheaders});
+      '&obj=' + encodeURIComponent(objConstraint) + '&limit=' + limit + '&offset=' + offset, this.with_header ? {headers: this.GETheaders} : {});
   }
 
 
@@ -120,12 +123,12 @@ export class ApiService {
     if (request.dataset !== 'all') {
       url += '&dataset=' + request.dataset;
     }
-    return this.http.get(url, {headers: this.GETheaders})
+    return this.http.get(url, this.with_header ? {headers: this.GETheaders} : {})
   }
 
 
   suggest(summary: Summary, position: string): Observable<Object> {
-    return this.http.get(this.baseUrl + '/api/v1/SPO?position=' + position + '&summary=' + summary.id, {headers: this.GETheaders});
+    return this.http.get(this.baseUrl + '/api/v1/SPO?position=' + position + '&summary=' + summary.id, this.with_header ? {headers: this.GETheaders} : {});
   }
 
 
@@ -142,7 +145,7 @@ export class ApiService {
       '&offset=' + request.offset +
       '&sort=' + request.sort;
 
-    return this.http.get(url, {headers: this.GETheaders});
+    return this.http.get(url, this.with_header ? {headers: this.GETheaders} : {});
   }
 
   extractTriples(request: ExtractorRequest): Observable<Object>{
@@ -156,7 +159,7 @@ export class ApiService {
       '&limit=' + request.limit +
       '&offset=' + request.offset;
 
-    return this.http.get(url, {headers: this.GETheaders});
+    return this.http.get(url, this.with_header ? {headers: this.GETheaders} : {});
   }
 
 
@@ -166,12 +169,26 @@ export class ApiService {
     const url = this.getUrl(cluster);
     const data = 'summary=' + request.summary.id + '&store=' + request.stored +
       '&index=' + request.indexed + '&domain=' + request.domain;
-    return this.http.post(url + '/api/v1/consolidate', data, {headers: this.POSTheaders});
+
+    if (!this.with_header ) {
+      const httpOptions = {
+        headers: new HttpHeaders({
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': 'my-auth-token'
+        })
+      };
+      return this.http.post(url + '/api/v1/consolidate', data, httpOptions);
+    }
+    else
+      return this.http.post(url + '/api/v1/consolidate', data, {headers: this.POSTheaders});
   }
 
 
   upload(cluster: boolean, file: File, mode: string): Observable<Object> {
-    const httpOptions = {headers: new HttpHeaders().append('Authorization',  'Bearer ' + localStorage.getItem(TOKEN_NAME))};
+    const httpOptions = this.with_header  ?
+      {headers: new HttpHeaders().append('Authorization', 'Bearer ' + localStorage.getItem(TOKEN_NAME))} :
+      {headers: new HttpHeaders()}
+    ;
     const formData = new FormData();
     formData.append('file', file);
 
@@ -186,7 +203,17 @@ export class ApiService {
 
   manage(cluster: boolean, type: string, command: string, id: string): Observable<Object> {
     const url = this.getUrl(cluster);
-    return this.http.post(url + '/api/v1/' + type + '/' + command + '/' + id, {}, {headers: this.POSTheaders});
+    if (!this.with_header ) {
+      const httpOptions = {
+        headers: new HttpHeaders({
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': 'my-auth-token'
+        })
+      };
+      return this.http.post(url + '/api/v1/' + type + '/' + command + '/' + id, {}, httpOptions);
+    }
+    else
+      return this.http.post(url + '/api/v1/' + type + '/' + command + '/' + id, {}, {headers: this.POSTheaders});
   }
 
   summarize(cluster: boolean, request: SummarizationRequest): Observable<Object> {
@@ -197,7 +224,17 @@ export class ApiService {
     if (request.ontology !== undefined) {
       data += '&ontologies=' + request.ontology.id;
     }
-    return this.http.post(url + '/api/v1/summarizator', data, {headers: this.POSTheaders});
+    if (!this.with_header ) {
+      const httpOptions = {
+        headers: new HttpHeaders({
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': 'my-auth-token'
+        })
+      };
+      return this.http.post(url + '/api/v1/summarizator', data, httpOptions);
+    }
+    else
+      return this.http.post(url + '/api/v1/summarizator', data, {headers: this.POSTheaders});
   }
 
 
