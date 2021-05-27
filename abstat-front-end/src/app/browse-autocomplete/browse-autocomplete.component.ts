@@ -26,13 +26,20 @@ export class BrowseAutocompleteComponent implements OnChanges  {
 
 
   ngOnChanges(changes: SimpleChanges) {
-     if (changes['summary']) {
-       let q_url = "http://localhost/api/v2/SPO?summary=" + this.summary.id + "&qPosition=" + this.type + "&qString="
-       const httpOptions = {headers: new HttpHeaders().append('Authorization',  'Bearer ' + localStorage.getItem(TOKEN_NAME))};
-       let dataRemote =  this.completerService.remote(q_url, "prefixed", "prefixed");
-       dataRemote. requestOptions(httpOptions);
-       this.dataService = dataRemote
-     }
+    if (changes['summary']) {
+      if (this.summary.id == "place_holder_id!!!!"){
+        let q_url = "http://localhost/api/v2/SPO?summary=" + this.summary.id + "&qPosition=" + this.type + "&qString="
+        const httpOptions = {headers: new HttpHeaders().append('Authorization',  'Bearer ' + localStorage.getItem(TOKEN_NAME))};
+        let dataRemote =  this.completerService.remote(q_url, "prefixed", "prefixed");
+        dataRemote. requestOptions(httpOptions);
+        this.dataService = dataRemote
+      }
+      else {
+        this.obtainSuggestions();
+        this.dataService = this.completerService.local(this.results);
+      }
+    }
+
   }
 
 
