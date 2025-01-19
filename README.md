@@ -3,7 +3,7 @@
 ABSTAT is a powerful tool designed to provide statistical profiles of RDF knowledge graphs, offering users a compact and comprehensive way to analyze and manage semantic data.  
 This repository contains the front-end module.  
 - For the back-end application, please refer to the [**ABSTAT (Back-end Application) Repository**](https://bitbucket.org/disco_unimib/abstat).
-- For core algorithms, please refer to the [**ABSTAT-HD Repository**](https://github.com/rAlvaPrincipe/abstat-distributed).
+- For core algorithms, please refer to the [**ABSTAT-HD Repository**](https://bitbucket.org/disco_unimib/abstat-distributed).
 
 ---
 
