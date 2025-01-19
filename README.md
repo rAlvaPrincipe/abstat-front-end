@@ -65,4 +65,9 @@ For a detailed explanation of ABSTAT’s methodologies and applications, refer t
 ---
 
 
+## License
+
+GNU Affero General Public License v3.0
+
+
 
