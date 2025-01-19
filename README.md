@@ -53,7 +53,6 @@ Follow these steps to set up and build the ABSTAT front-end:
 ### Full-Text Search
 - Filters concepts, properties, and types within datasets.
 - Includes options to prefer or exclude non-preferred resources.
-- 
 ---
 
 ## References
