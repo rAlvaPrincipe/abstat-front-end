@@ -58,10 +58,10 @@ Follow these steps to set up and build the ABSTAT front-end:
 
 ## References
 
-For a detailed explanation of ABSTAT’s methodologies and applications, refer to the following paper:
+For a detailed explanation of ABSTAT’s methodologies and applications, refer to the following papers:
 
-*Principe, R. A. A., Spahiu, B., Palmonari, M., Rula, A., De Paoli, F., & Maurino, A. (2018). ABSTAT 1.0: Compute, manage and share semantic profiles of RDF knowledge graphs. In The Semantic Web: ESWC 2018 Satellite Events: ESWC 2018 Satellite Events, Heraklion, Crete, Greece, June 3-7, 2018, Revised Selected Papers 15 (pp. 170-175). Springer International Publishing.*
-
+- *Principe, R. A. A., Spahiu, B., Palmonari, M., Rula, A., De Paoli, F., & Maurino, A. (2018). ABSTAT 1.0: Compute, manage and share semantic profiles of RDF knowledge graphs. In The Semantic Web: ESWC 2018 Satellite Events: ESWC 2018 Satellite Events, Heraklion, Crete, Greece, June 3-7, 2018, Revised Selected Papers 15 (pp. 170-175). Springer International Publishing.*
+- *Alva Principe, R. A., Maurino, A., Palmonari, M., Ciavotta, M., & Spahiu, B. (2021). ABSTAT-HD: a scalable tool for profiling very large knowledge graphs. The VLDB Journal, 1-26.*
 ---
 
 
